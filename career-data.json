@@ -13,7 +13,7 @@
     "photo": "avatar-photo.jpg",
     "fieldPhoto": "rig-field-photo.jpg",
     "artwork": "art-drawing.jpg",
-    "summary": "High-impact Exploration & Wellsite Geologist at ONGC blending 2.5 years of frontier basin interpretation (Vindhyan Block Group) with frontline drilling rig operations. Proven record in 2D/3D seismic interpretation (Petrel, PaleoScan), prospect maturation across BExB and EPMB blocks, 3D Mechanical Earth Modeling (MEM), and pioneering national clean energy exploration in Natural Hydrogen (H2) and Helium (He). Experienced in real-time wellsite lithological logging, hydrocarbon surveillance (UV cut/fluorescence, C1-C5 chromatograph), pore pressure / PDA surveillance, and critical 8.5\" phase open-ended drill pipe cement squeeze remediation at GDA-A Samastipur."
+    "summary": "High-impact Exploration & Wellsite Geologist at ONGC blending 2.5 years of frontier basin interpretation (Vindhyan Block Group) with frontline drilling rig operations. Proven record in 2D/3D seismic interpretation (Petrel, PaleoScan), prospect maturation across BExB and EPMB blocks, 3D Mechanical Earth Modeling (MEM), and pioneering national clean energy exploration in Natural Hydrogen (H2) and Helium (He). Experienced in real-time wellsite lithological logging, hydrocarbon surveillance (UV cut/fluorescence, C1-C5 chromatograph), pore pressure surveillance, Post Drill Analysis (PDA), and critical 8.5\" phase open-ended drill pipe cement squeeze remediation at GDA-A Samastipur."
   },
 
   "stats": {
@@ -35,12 +35,12 @@
       "location": "Frontline Exploratory Drilling Rigs (12hr / 24hr Rotations)",
       "badge": "ACTIVE FRONTLINE RIG OPS",
       "room": "rig",
-      "arsenal": ["Binocular Microscopy", "Fluoroscope UV", "Mud Gas Gas-Chromatograph", "Pressure While Drilling (PDA)", "dc-Exponent"],
+      "arsenal": ["Binocular Microscopy", "Fluoroscope UV", "Mud Gas Gas-Chromatograph", "Post Drill Analysis (PDA)", "dc-Exponent"],
       "highlights": [
         "24/7 real-time formation top evaluation and geological prognosis correlation on active exploratory drilling rigs.",
         "Precision drill-cuttings lithological description under binocular microscope, grain texture analysis, and mineralogical identification.",
         "Continuous hydrocarbon surveillance: direct fluorescence, chemical solvent cut evaluation, and real-time mud gas surveillance (Total Gas & C1–C5 chromatographic breakdown).",
-        "Pore pressure estimation, dc-exponent trendline monitoring, trip gas / connection gas surveillance, and Pressure While Drilling (PDA) tracking across 12hr and 24hr shift rotations.",
+        "Pore pressure estimation, dc-exponent trendline monitoring, trip gas / connection gas surveillance, and Post Drill Analysis (PDA) across 12hr and 24hr shift rotations.",
         "Supervision of critical 8.5\" phase drilling and open-ended drill pipe cement squeeze operations for wellbore integrity remediation at GDA-A Samastipur."
       ]
     },
@@ -60,7 +60,7 @@
         "Pioneered unconventional clean resource exploration targeting Natural Hydrogen (H2) and Helium (He) play concepts in deep basement shear systems across Vindhyan & Chhattisgarh basins.",
         "Conducted critical mineral enrichment zone mapping and 3D Mechanical Earth Modeling (MEM) / fault mapping in Son Valley & Bhima-Kaladgi basins.",
         "Performed integrated petrophysical wireline log evaluations (DSPetrophysics) for sandstone and carbonate reservoirs.",
-        "Monitored under-drilling exploratory wells, executed Pore Pressure & Drillability Analysis (PDA), and managed technical administration and statutory directorate reporting."
+        "Monitored under-drilling exploratory wells, executed Post Drill Analysis (PDA), and managed technical administration and statutory directorate reporting."
       ]
     },
     {
@@ -125,12 +125,12 @@
     },
     {
       "id": "ach_pda_surveillance",
-      "title": "Real-Time 24hr PDA & Mud Gas Surveillance",
+      "title": "Real-Time Mud Gas Surveillance & Post Drill Analysis (PDA)",
       "category": "rig",
       "date": "2025",
       "badge": "ZERO INCIDENT RECORD",
       "xp": 100,
-      "description": "Tracked real-time pore pressure, dc-exponent trends, and gas chromatograph signatures across 12hr and 24hr shift rotations with zero LTIs."
+      "description": "Executed real-time formation surveillance, mud gas chromatography, and comprehensive Post Drill Analysis (PDA) with zero LTIs."
     },
     {
       "id": "ach_msc_thesis_ml",
@@ -164,7 +164,7 @@
     },
     {
       "id": "quest_kill_kick",
-      "name": "Kill the Kick! PDA Hero",
+      "name": "Kill the Kick! Well Control Hero",
       "room": "rig",
       "target": "Rig Doghouse Pressure Console",
       "description": "Mash [SPACE] to balance mud hydrostatic pressure and keep the gauge green for 5s.",
@@ -279,8 +279,8 @@
       "Drill Cuttings Lithology",
       "Hydrocarbon Show & UV Fluorescence",
       "Mud Gas Surveillance (C1–C5)",
-      "Pore Pressure Evaluation (PDA)",
-      "dc-Exponent Analysis",
+      "Post Drill Analysis (PDA)",
+      "Pore Pressure Evaluation & dc-Exponent",
       "Cement Squeeze Oversight (8.5\" Phase at GDA-A)",
       "Rig Safety & LTI Protocols",
       "12hr & 24hr Shift Rotations"
@@ -332,6 +332,59 @@
       "issuer": "freeCodeCamp",
       "topics": "Computational algorithms, scientific numerical analysis, data structures"
     }
+  ],
+
+  "operationsTally": [
+    {
+      "basin": "Vindhyan Basin",
+      "block": "BExB & EPMB",
+      "role": "Lead Interpretation Geologist",
+      "method": "Petrel, PaleoScan, 2D/3D Seismic",
+      "impact": "Drillable Prospects Matured & Defended"
+    },
+    {
+      "basin": "Son Valley & Bhima-Kaladgi",
+      "block": "Deep Subsurface",
+      "role": "Geomechanics Lead",
+      "method": "3D MEM, Fault Trajectory & Geosteering",
+      "impact": "Stress tensor calibrated for deep drilling"
+    },
+    {
+      "basin": "GDA-A Samastipur",
+      "block": "8.5\" Drilling Phase",
+      "role": "Wellsite Frontline Ops",
+      "method": "Open-Ended Drill Pipe Cement Squeeze",
+      "impact": "0 LTI, formation integrity restored"
+    },
+    {
+      "basin": "Vindhyan & Chhattisgarh",
+      "block": "Unconventional Play",
+      "role": "Energy Transition Geologist",
+      "method": "Natural H2 & He Gas Desorption / Isotopic Logging",
+      "impact": "Pioneering national clean gas mapping"
+    },
+    {
+      "basin": "Assam Shelf",
+      "block": "Barail & Tipam Formations",
+      "role": "Wellsite Logging Trainee (OIL)",
+      "method": "Master Log, Cuttings Lithology, UV Fluorescence",
+      "impact": "Lithostratigraphic tops verified"
+    }
+  ],
+
+  "technicalReports": [
+    "G&G Evaluation and Prospect Generation in BExB & EPMB Blocks, Vindhyan Basin (ONGC Internal Technical Folio, 2024–2025)",
+    "Supervised Machine Learning of EPMA Garnet Geochemistry for Diamondiferous Kimberlite Host Provenance (M.Sc. Tech Thesis, IIT ISM Dhanbad)",
+    "3D Mechanical Earth Modeling & In-Situ Stress Tensor Analysis for Son Valley Unconventional Reservoirs (ONGC Geomechanics Special Report)",
+    "Natural Hydrogen (H2) and Helium (He) Seepage Mechanisms along Proterozoic Crustal Lineaments (Basin Evaluation Report)",
+    "Post-Drill Geological & Hydrocarbon Analysis (PDA) of Exploratory Wells in Frontier Sectors (Well Completion Dossier)"
+  ],
+
+  "specializedTraining": [
+    "AI for Earth Observation & Deep Subsurface Remote Sensing (ISRO / IEEE GRSS, 2024)",
+    "Advanced 3D Seismic Interpretation & Relative Geologic Time (RGT) Workflows (Schlumberger Petrel & Eliis PaleoScan, 2023–2024)",
+    "Offshore / Onshore Rig Floor Safety, Wellsite Hazards & Permit-to-Work (ONGC Safety Academy, 2023)",
+    "IWCF / IADC Well Control Surface Stack Principles & Kick Tolerance (Operational Familiarization)"
   ],
 
   "extracurriculars": [

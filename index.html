@@ -200,8 +200,12 @@
         <p class="title" id="modal-hotspot-title">Subsurface Command Center</p>
         <div class="modal-body-layout">
           <div class="modal-sidebar">
-            <canvas id="dialog-portrait-canvas" width="80" height="80" class="dialog-portrait"></canvas>
+            <div class="portrait-frame-wrapper">
+              <canvas id="dialog-portrait-canvas" width="80" height="80" class="dialog-portrait"></canvas>
+              <div id="dialog-mood-badge" class="dialog-mood-badge">WICKED SMIRK</div>
+            </div>
             <span id="dialog-portrait-label" class="dialog-label">Rajdeep Tarafder</span>
+            <div id="dialog-quote-bubble" class="dialog-quote-bubble">"Subsurface decoded. Target depth locked — Drill here!"</div>
           </div>
           <div id="modal-hotspot-content" class="modal-text-content">
             <!-- Dynamically injected from career-data.json -->
@@ -219,11 +223,12 @@
       <div class="nes-container is-dark with-title modal-window seismic-window">
         <p class="title">MINI-GAME: SEISMIC FAULT SNIPER (PETREL WORKSTATION)</p>
         <div class="minigame-instructions">
-          Target 3 moving acoustic impedance anomalies / fault traces! Click on them as they scroll past to mature BExB & EPMB prospects!
+          Target 3 moving acoustic impedance anomalies / fault traces! Click on them as they scroll past to mature BExB &amp; EPMB prospects!
         </div>
         <div class="seismic-stats-bar">
           <span>FAULTS SNIPED: <strong id="seismic-score">0</strong> / 3</span>
           <span>TIME REMAINING: <strong id="seismic-timer">15s</strong></span>
+          <button id="btn-trigger-petrel-freeze" class="nes-btn is-warning crash-pill-btn" title="Simulate Petrel 4:59 PM Crash">💥 4:59 PM Petrel Freeze</button>
         </div>
         <canvas id="seismic-canvas" width="600" height="200" class="seismic-waveform-canvas"></canvas>
         <div id="seismic-result" class="minigame-result-msg hidden"></div>
@@ -236,7 +241,7 @@
     <!-- MINI-GAME 2: KILL THE KICK! (RIG DOGHOUSE PRESSURE & CEMENT HERO) -->
     <div id="modal-mini-kick" class="rpg-modal-overlay hidden">
       <div class="nes-container is-dark with-title modal-window kick-window">
-        <p class="title">MINI-GAME: KILL THE KICK! PDA & CEMENT SQUEEZE HERO</p>
+        <p class="title">MINI-GAME: KILL THE KICK! PRESSURE &amp; CEMENT SQUEEZE HERO</p>
         <div class="minigame-instructions">
           🚨 FORMATION GAS KICK AT GDA-A SAMASTIPUR! Rapidly mash <strong>[SPACE]</strong> or click <strong>[PUMP MUD]</strong> to keep the pressure needle inside the GREEN TARGET ZONE for 5 seconds!
         </div>
@@ -251,6 +256,7 @@
         <div class="kick-control-row">
           <span>SAFE DURATION: <strong id="kick-timer">0.0s</strong> / 5.0s</span>
           <button id="btn-pump-mud" class="nes-btn is-warning pump-btn">PUMP MUD WEIGHT [SPACE]</button>
+          <button id="btn-trigger-masala-chai" class="nes-btn is-primary chai-pill-btn" title="Inspect 3 AM Masala Chai Kettle">☕ 3 AM Chai Kettle</button>
         </div>
         <div id="kick-result" class="minigame-result-msg hidden"></div>
         <div class="modal-footer-bar">
@@ -437,7 +443,7 @@
             <button class="radio-chip" data-query="cement">🛢️ 8.5" Cement Squeeze at GDA-A</button>
             <button class="radio-chip" data-query="petrel">💻 Petrel &amp; PaleoScan Seismic Strengths</button>
             <button class="radio-chip" data-query="thesis">🤖 M.Sc. ML Garnet Thesis &amp; Exploration</button>
-            <button class="radio-chip" data-query="pda">📈 Real-Time PDA &amp; Mud Gas Surveillance</button>
+            <button class="radio-chip" data-query="pda">📈 Post Drill Analysis (PDA) &amp; Mud Gas</button>
             <button class="radio-chip" data-query="sports">⚽ Football Championship &amp; Fitness</button>
           </div>
         </div>
@@ -480,27 +486,195 @@
     </div>
 
     <!-- ================================================================= -->
-    <!-- BOSS MODE: STANDARD 1-PAGE EXECUTIVE ATS PRINTABLE RESUME         -->
+    <!-- BOSS MODE: 100% INLINE-EDITABLE EXECUTIVE CV STUDIO               -->
     <!-- ================================================================= -->
     <div id="boss-resume-modal" class="boss-resume-modal hidden">
       <!-- Fixed Print & Close Toolbar -->
       <div class="boss-toolbar no-print">
-        <div class="toolbar-left">
-          <button id="btn-resume-back" class="nes-btn is-primary">
-            <span>&larr; Resume Geology Quest</span>
-          </button>
-          <span class="boss-notice">🚨 BOSS PANIC VIEW: CLEAN EXECUTIVE RESUME (ATS OPTIMIZED)</span>
+        <div class="toolbar-row-top">
+          <div class="toolbar-left">
+            <button id="btn-resume-back" class="nes-btn is-primary">
+              <span>&larr; Resume Quest</span>
+            </button>
+            <button id="btn-toggle-edit-mode" class="nes-btn is-warning studio-edit-toggle" title="Toggle WYSIWYG live editing">
+              <span id="edit-toggle-icon">✏️</span> <span id="edit-toggle-text">Live Edit Mode: OFF</span>
+            </button>
+            <button id="btn-add-custom-section" class="nes-btn is-success edit-ctrl-btn hidden">
+              <span>➕ Add Section</span>
+            </button>
+          </div>
+          <div class="toolbar-right">
+            <button id="btn-reset-cv-defaults" class="nes-btn is-error edit-ctrl-btn hidden" title="Reset all edits to original CV data">
+              <span>🔄 Reset Defaults</span>
+            </button>
+            <button id="btn-admin-export-pin" class="nes-btn is-primary admin-pin-btn" title="Admin Export career-data.json (Requires CPF PIN: 141604)">
+              <span>🔒 Admin Export (PIN)</span>
+            </button>
+            <button id="btn-copy-ats" class="nes-btn">📋 Copy Plaintext</button>
+            <button id="btn-print-cv" class="nes-btn is-success">🖨️ Print / PDF</button>
+          </div>
         </div>
-        <div class="toolbar-right">
-          <button id="btn-copy-ats" class="nes-btn">📋 Copy Plaintext</button>
-          <button id="btn-print-cv" class="nes-btn is-success">🖨️ Print / Save PDF</button>
+
+        <div class="toolbar-row-controls">
+          <div class="cv-filter-bar">
+            <span class="toolbar-label">ARCHETYPE FILTER:</span>
+            <div class="cv-filter-group">
+              <button class="cv-filter-btn active" data-filter="all">🌟 All Profiles</button>
+              <button class="cv-filter-btn" data-filter="interpretation">💻 G&amp;G Interpretation</button>
+              <button class="cv-filter-btn" data-filter="wellsite">🛢️ Wellsite &amp; Drilling</button>
+              <button class="cv-filter-btn" data-filter="ai">🤖 AI / SAR &amp; Data Science</button>
+            </div>
+          </div>
+          <div class="cv-theme-bar">
+            <span class="toolbar-label">CV THEME PRESET:</span>
+            <div class="cv-theme-group">
+              <button class="cv-theme-btn active" data-theme="white">📄 Classic Executive White (ATS)</button>
+              <button class="cv-theme-btn" data-theme="ongc">🏛️ ONGC Maroon &amp; Gold</button>
+              <button class="cv-theme-btn" data-theme="terminal">💻 Subsurface Dark Terminal</button>
+            </div>
+          </div>
         </div>
       </div>
 
       <!-- Printable Resume Paper Document -->
       <div class="boss-resume-scroll">
-        <div id="boss-printable-document" class="printable-paper">
-          <!-- Dynamically populated from career-data.json -->
+        <div id="boss-printable-document" class="printable-paper theme-white">
+          <!-- Dynamically populated and live-editable -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- EXPEDITION BACKPACK & 10-EXPRESSION SOUNDBOARD MODAL              -->
+    <!-- ================================================================= -->
+    <div id="modal-backpack" class="rpg-modal-overlay hidden">
+      <div class="nes-container is-dark with-title modal-window backpack-window">
+        <p class="title">🎒 EXPEDITION BACKPACK &amp; 10-EXPRESSION AVATAR STUDIO [I]</p>
+        <div class="backpack-tabs">
+          <button id="tab-backpack-gear" class="nes-btn is-primary tab-active">⚒️ Field Equipment</button>
+          <button id="tab-backpack-expressions" class="nes-btn">🎭 10-Expression Soundboard (<span id="soundboard-active-mood">WICKED SMIRK</span>)</button>
+        </div>
+
+        <!-- Tab 1: Field Gear & Items -->
+        <div id="pane-backpack-gear" class="backpack-pane">
+          <div class="gear-grid">
+            <div class="gear-card">
+              <div class="gear-icon">🔨</div>
+              <div class="gear-info">
+                <strong>Estwing 22oz Rock Hammer [H]</strong>
+                <p>Forged steel head for chipping fresh outcrop faces. Spawns mineral particles and unlocks outcrop samples!</p>
+              </div>
+            </div>
+            <div class="gear-card">
+              <div class="gear-icon">🔍</div>
+              <div class="gear-info">
+                <strong>10x Hastings Triplet Loupe [M]</strong>
+                <p>Achromatic hand lens. Detects sub-calcic pyrope garnets, grain textures, and micro-fractures in drill cuttings.</p>
+              </div>
+            </div>
+            <div class="gear-card">
+              <div class="gear-icon">💻</div>
+              <div class="gear-info">
+                <strong>Schlumberger Petrel USB Dongle</strong>
+                <p>Licensing key for 3D seismic interpretation, Relative Geologic Time (RGT), and prospect generation in BExB &amp; EPMB.</p>
+              </div>
+            </div>
+            <div class="gear-card">
+              <div class="gear-icon">🧪</div>
+              <div class="gear-info">
+                <strong>UV Fluoroscope &amp; Solvent Kit</strong>
+                <p>10% Dilute HCl for carbonates + C2Cl4 solvent for direct hydrocarbon fluorescence cut evaluation.</p>
+              </div>
+            </div>
+            <div class="gear-card">
+              <div class="gear-icon">🧭</div>
+              <div class="gear-info">
+                <strong>Brunton Pocket Transit Compass</strong>
+                <p>Precision clinometer &amp; compass for strike, dip, rake, and structural lineament measurements.</p>
+              </div>
+            </div>
+            <div class="gear-card">
+              <div class="gear-icon">☕</div>
+              <div class="gear-info">
+                <strong>Rig Thermos Flask (Kettle Masala Chai)</strong>
+                <p>Triple-strength cardamom brew. Sustains alertness across 12-hour and 24-hour night shift rotations!</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Tab 2: 10-Expression Soundboard -->
+        <div id="pane-backpack-expressions" class="backpack-pane hidden">
+          <div class="soundboard-intro">
+            <p>Click any expression below to preview the procedural 16-bit artwork, play its 8-bit voice chirp, read its industry lore quote, and set Rajdeep's active mood!</p>
+          </div>
+          <div class="soundboard-preview-bar">
+            <div class="soundboard-preview-avatar">
+              <canvas id="soundboard-preview-canvas" width="80" height="80"></canvas>
+            </div>
+            <div class="soundboard-preview-meta">
+              <h3 id="sb-preview-title">WICKED DISCOVERY SMIRK</h3>
+              <p id="sb-preview-quote" class="sb-quote">"Subsurface decoded. Target depth locked — Drill here!"</p>
+              <div class="sb-tags">
+                <span id="sb-preview-trigger" class="sb-tag">Petrel BExB/EPMB Prospects &amp; Pay Zones</span>
+                <button id="btn-apply-expression" class="nes-btn is-success apply-expr-btn">✨ Set as Active Avatar Mood</button>
+              </div>
+            </div>
+          </div>
+          <div id="soundboard-grid" class="soundboard-grid">
+            <!-- 10 expression cards injected by game.js -->
+          </div>
+        </div>
+
+        <div class="modal-footer-bar">
+          <button id="btn-close-backpack" class="nes-btn is-error">Close Backpack</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- EASTER EGG 1: PETREL 4:59 PM UNSAVED CUBE CRASH SCREEN           -->
+    <!-- ================================================================= -->
+    <div id="modal-petrel-crash" class="rpg-modal-overlay hidden">
+      <div class="nes-container is-dark with-title petrel-crash-box">
+        <p class="title" style="color: #EF4444;">🚨 SCHLUMBERGER PETREL 2024.1: CRITICAL EXCEPTION</p>
+        <div class="crash-content">
+          <div class="crash-icon">💾💥</div>
+          <div class="crash-text">
+            <h3 style="color: #F87171;">WARNING: Unexpected 3D Seismic Horizon Unconformity!</h3>
+            <p>Time is <strong>4:59:58 PM</strong> on Friday. You have <strong>3 unsaved 3D seismic cubes</strong> and 14 BExB/EPMB prospect faults loaded in GPU memory!</p>
+            <p class="crash-flashing">Mash <strong>[Ctrl + S]</strong> or click <strong>[RESCUE PROJECT NOW]</strong> before Petrel crashes to desktop!</p>
+          </div>
+        </div>
+        <div class="crash-actions">
+          <button id="btn-rescue-petrel" class="nes-btn is-success">💾 RESCUE PROJECT [Ctrl+S] (+50 XP)</button>
+          <button id="btn-dismiss-petrel" class="nes-btn is-error">💥 Let It Crash (Catastrophic Loss)</button>
+        </div>
+        <div id="petrel-rescue-result" class="minigame-result-msg hidden"></div>
+      </div>
+    </div>
+
+    <!-- ================================================================= -->
+    <!-- EASTER EGG 2: 3 AM MASALA CHAI MYSTERY GAS SPIKE                 -->
+    <!-- ================================================================= -->
+    <div id="modal-masala-chai" class="rpg-modal-overlay hidden">
+      <div class="nes-container is-dark with-title chai-box">
+        <p class="title" style="color: #F59E0B;">☕ 3 AM RIG DOGHOUSE MASALA CHAI MYSTERY</p>
+        <div class="chai-content">
+          <div class="chai-siren">🚨💨☕</div>
+          <div class="chai-text">
+            <h3 style="color: #EF4444;">ALARM: Mud Logging Unit Detects 85% C1 Methane Spike at 3:15 AM!</h3>
+            <p>Total gas telemetry spiked vertically during 8.5" drilling at GDA-A Samastipur! Is it a reservoir gas kick or false alarm?</p>
+            <p><em>Inspect the detector intake with your 10x Petrological Loupe [M]!</em></p>
+          </div>
+        </div>
+        <div class="chai-actions">
+          <button id="btn-inspect-chai" class="nes-btn is-warning">🔍 Inspect Detector Intake with 10x Loupe [M]</button>
+          <button id="btn-close-chai" class="nes-btn is-error">Dismiss Siren</button>
+        </div>
+        <div id="chai-investigation-result" class="chai-result hidden">
+          <p style="color: #4ADE80; font-weight: bold;">🔍 False Alarm Solved: Rig chemist boiled cardamom tea directly under the catalytic hydrocarbon sniffer sensor!</p>
+          <p>+50 XP: Chai Detective unlocked! Expression morphed to <strong>10x LOUPE CYCLOPS</strong>!</p>
         </div>
       </div>
     </div>

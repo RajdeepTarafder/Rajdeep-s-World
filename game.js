@@ -15,7 +15,7 @@ const DEFAULT_CAREER_DATA = {
     "phone": "+91 90075 15735",
     "linkedin": "https://linkedin.com/in/rajdeep-tarafder-82a408184",
     "location": "Dehradun / Field Ops, India",
-    "summary": "High-impact Exploration & Wellsite Geologist at ONGC blending 2.5 years of frontier basin interpretation (Vindhyan Block Group) with frontline drilling rig operations. Proven record in 2D/3D seismic interpretation (Petrel, PaleoScan), prospect maturation across BExB and EPMB blocks, 3D Mechanical Earth Modeling (MEM), and pioneering national clean energy exploration in Natural Hydrogen (H2) and Helium (He). Experienced in real-time wellsite lithological logging, hydrocarbon surveillance (UV cut/fluorescence, C1-C5 chromatograph), pore pressure / PDA surveillance, and critical 8.5\" phase open-ended drill pipe cement squeeze remediation at GDA-A Samastipur."
+    "summary": "High-impact Exploration & Wellsite Geologist at ONGC blending 2.5 years of frontier basin interpretation (Vindhyan Block Group) with frontline drilling rig operations. Proven record in 2D/3D seismic interpretation (Petrel, PaleoScan), prospect maturation across BExB and EPMB blocks, 3D Mechanical Earth Modeling (MEM), and pioneering national clean energy exploration in Natural Hydrogen (H2) and Helium (He). Experienced in real-time wellsite lithological logging, hydrocarbon surveillance (UV cut/fluorescence, C1-C5 chromatograph), pore pressure surveillance, Post Drill Analysis (PDA), and critical 8.5\" phase open-ended drill pipe cement squeeze remediation at GDA-A Samastipur."
   },
   "stats": { "level": 4, "currentXP": 650, "maxXP": 1000, "stamina": 100, "coffeeBoost": 100 },
   "roles": [],
@@ -26,11 +26,135 @@ const DEFAULT_CAREER_DATA = {
   "fieldwork": [],
   "skills": { "subsurface": [], "wellsite": [], "unconventional": [], "programming": [], "design": [] },
   "certifications": [],
-  "extracurriculars": []
+  "extracurriculars": [],
+  "operationsTally": [
+    {
+      "basin": "Vindhyan Basin",
+      "block": "BExB & EPMB",
+      "role": "Lead Interpretation Geologist",
+      "method": "Petrel, PaleoScan, 2D/3D Seismic",
+      "impact": "Drillable Prospects Matured & Defended"
+    },
+    {
+      "basin": "Son Valley & Bhima-Kaladgi",
+      "block": "Deep Subsurface",
+      "role": "Geomechanics Lead",
+      "method": "3D MEM, Fault Trajectory & Geosteering",
+      "impact": "Stress tensor calibrated for deep drilling"
+    },
+    {
+      "basin": "GDA-A Samastipur",
+      "block": "8.5\" Drilling Phase",
+      "role": "Wellsite Frontline Ops",
+      "method": "Open-Ended Drill Pipe Cement Squeeze",
+      "impact": "0 LTI, formation integrity restored"
+    },
+    {
+      "basin": "Vindhyan & Chhattisgarh",
+      "block": "Unconventional Play",
+      "role": "Energy Transition Geologist",
+      "method": "Natural H2 & He Gas Desorption / Isotopic Logging",
+      "impact": "Pioneering national clean gas mapping"
+    },
+    {
+      "basin": "Assam Shelf",
+      "block": "Barail & Tipam Formations",
+      "role": "Wellsite Logging Trainee (OIL)",
+      "method": "Master Log, Cuttings Lithology, UV Fluorescence",
+      "impact": "Lithostratigraphic tops verified"
+    }
+  ],
+  "technicalReports": [
+    "G&G Evaluation and Prospect Generation in BExB & EPMB Blocks, Vindhyan Basin (ONGC Internal Technical Folio, 2024–2025)",
+    "Supervised Machine Learning of EPMA Garnet Geochemistry for Diamondiferous Kimberlite Host Provenance (M.Sc. Tech Thesis, IIT ISM Dhanbad)",
+    "3D Mechanical Earth Modeling & In-Situ Stress Tensor Analysis for Son Valley Unconventional Reservoirs (ONGC Geomechanics Special Report)",
+    "Natural Hydrogen (H2) and Helium (He) Seepage Mechanisms along Proterozoic Crustal Lineaments (Basin Evaluation Report)",
+    "Post-Drill Geological & Hydrocarbon Analysis (PDA) of Exploratory Wells in Frontier Sectors (Well Completion Dossier)"
+  ],
+  "specializedTraining": [
+    "AI for Earth Observation & Deep Subsurface Remote Sensing (ISRO / IEEE GRSS, 2024)",
+    "Advanced 3D Seismic Interpretation & Relative Geologic Time (RGT) Workflows (Schlumberger Petrel & Eliis PaleoScan, 2023–2024)",
+    "Offshore / Onshore Rig Floor Safety, Wellsite Hazards & Permit-to-Work (ONGC Safety Academy, 2023)",
+    "IWCF / IADC Well Control Surface Stack Principles & Kick Tolerance (Operational Familiarization)"
+  ]
 };
 
 // Global state
 window.CAREER_DATA = DEFAULT_CAREER_DATA;
+
+// 10 Distinct Procedural Pixel-Art Expressions
+const PORTRAIT_EXPRESSIONS = [
+  {
+    id: 'wicked_smirk',
+    name: 'WICKED DISCOVERY SMIRK',
+    quote: 'Subsurface decoded. Target depth locked — Drill here!',
+    triggerText: 'Petrel BExB/EPMB Prospects & Pay Zones',
+    sound: { freq: 740, type: 'sawtooth', duration: 0.15 }
+  },
+  {
+    id: 'caffeine_overdrive',
+    name: 'CAFFEINE OVERDRIVE MANIAC',
+    quote: '48 HOURS AWAKE! THE CORE LOG IS NEVER WRONG!',
+    triggerText: 'Rig Coffee Urn & 24-Hr Shift Dodge',
+    sound: { freq: 980, type: 'square', duration: 0.2 }
+  },
+  {
+    id: 'loupe_cyclops',
+    name: '10x LOUPE CYCLOPS',
+    quote: 'Euhedral pyrope! 100% Cr-diopside intergrowth spotted!',
+    triggerText: 'Outcrop / Cuttings 10x Inspection [M]',
+    sound: { freq: 620, type: 'triangle', duration: 0.18 }
+  },
+  {
+    id: 'blowout_sweat',
+    name: 'PDA BLOWOUT SWEAT',
+    quote: 'Kill sheet calculated! Mud weight 1.35 SG — pump now!',
+    triggerText: 'Rig Doghouse / Kill-the-Kick Cement Squeeze',
+    sound: { freq: 440, type: 'sawtooth', duration: 0.25 }
+  },
+  {
+    id: 'helium_chipmunk',
+    name: 'HELIUM CHIPMUNK',
+    quote: 'Squeak! Pure mantle helium-4 and natural hydrogen flow!',
+    triggerText: 'H2 & He Unconventional Gas Cylinders',
+    sound: { freq: 1150, type: 'sine', duration: 0.2 }
+  },
+  {
+    id: 'matrix_hacker',
+    name: 'MATRIX SEISMIC HACKER',
+    quote: "I don't see seismic traces anymore. I see basin faults.",
+    triggerText: 'AI/SAR Hologram & Python ML Terminal',
+    sound: { freq: 520, type: 'square', duration: 0.18 }
+  },
+  {
+    id: 'centre_back',
+    name: 'CENTRE-BACK WARRIOR',
+    quote: 'No striker passes this defensive line! Clean sheet guaranteed!',
+    triggerText: 'Football Pitch [F] Slide Tackle & Gym Barbell',
+    sound: { freq: 380, type: 'triangle', duration: 0.2 }
+  },
+  {
+    id: 'kimberlite_eureka',
+    name: 'KIMBERLITE DIAMOND EUREKA',
+    quote: 'G10 sub-calcic pyrope vector detected! We hit the pipe!',
+    triggerText: 'EPMA Diamond ML Terminal & Core Vault',
+    sound: { freq: 880, type: 'sine', duration: 0.22 }
+  },
+  {
+    id: 'shift_zombie',
+    name: '24-HR SHIFT ZOMBIE',
+    quote: 'What day is it... did the night shift geologist arrive yet...?',
+    triggerText: 'Low Stamina & 24-Hr Night Shift Rotations',
+    sound: { freq: 260, type: 'sine', duration: 0.3 }
+  },
+  {
+    id: 'deal_with_it',
+    name: 'DEAL WITH IT (CHIEF EXPLORER)',
+    quote: 'Basin cleared. Reserves certified. Deal with it.',
+    triggerText: 'Level Up, Discovery Hero & Konami Code God Mode',
+    sound: { freq: 830, type: 'square', duration: 0.25 }
+  }
+];
 
 // Audio Synthesizer Engine (Web Audio API - 100% Procedural)
 class RetroSynth {
@@ -1046,7 +1170,7 @@ class SpriteStore {
       ctx.fillRect(44, 16, 24, 14);
       // Logging screens glowing inside
       ctx.fillStyle = '#22C55E'; ctx.fillRect(14, 18, 10, 5); // chromatograph
-      ctx.fillStyle = '#38BDF8'; ctx.fillRect(26, 18, 8, 10); // PDA telemetry
+      ctx.fillStyle = '#38BDF8'; ctx.fillRect(26, 18, 8, 10); // mud telemetry
       ctx.fillStyle = '#A855F7'; ctx.fillRect(46, 18, 10, 10); // UV fluoroscope
       ctx.fillStyle = '#FEF08A'; ctx.fillRect(58, 18, 8, 6); // litho column
       this.cache['prop_doghouse_cabin'] = canvas;
@@ -1093,7 +1217,7 @@ class SpriteStore {
       this.cache['prop_bop_stack'] = canvas;
     }
 
-    // Heavy Drawworks Winch & PDA Driller Console (48x48)
+    // Heavy Drawworks Winch & Driller Console (48x48)
     {
       const { canvas, ctx } = createBuffer(48, 48);
       ctx.fillStyle = '#1E293B';
@@ -1107,7 +1231,7 @@ class SpriteStore {
       ctx.fillStyle = '#0F172A';
       ctx.fillRect(28, 6, 14, 12);
       ctx.fillStyle = '#22C55E';
-      ctx.fillRect(30, 8, 10, 8); // PDA weight-on-bit & ROP
+      ctx.fillRect(30, 8, 10, 8); // weight-on-bit & ROP display
       this.cache['prop_drawworks'] = canvas;
     }
 
@@ -1482,47 +1606,414 @@ class SpriteStore {
   }
 
   buildPortraits() {
-    ['academic', 'lab', 'rig'].forEach(outfit => {
-      const { canvas, ctx } = createBuffer(80, 80);
-      ctx.fillStyle = '#0F172A';
-      ctx.fillRect(0, 0, 80, 80);
-      ctx.fillStyle = '#1E293B';
-      ctx.fillRect(2, 2, 76, 76);
-
-      let shirt = outfit === 'rig' ? '#EA580C' : outfit === 'lab' ? '#334155' : '#1E3A8A';
-      ctx.fillStyle = shirt;
-      ctx.fillRect(16, 54, 48, 22);
-
-      if (outfit === 'rig') {
-        ctx.fillStyle = '#E2E8F0';
-        ctx.fillRect(16, 62, 48, 4);
-      }
-
-      ctx.fillStyle = '#F5D0A9';
-      ctx.fillRect(24, 20, 32, 34);
-
-      if (outfit === 'rig') {
-        ctx.fillStyle = '#FACC15';
-        ctx.fillRect(18, 8, 44, 16);
-        ctx.fillRect(16, 22, 48, 5);
-      } else {
-        ctx.fillStyle = '#1C1917';
-        ctx.fillRect(22, 10, 36, 12);
-      }
-
-      if (outfit === 'lab') {
-        ctx.strokeStyle = '#38BDF8';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(26, 30, 10, 8);
-        ctx.strokeRect(44, 30, 10, 8);
-      }
-
-      ctx.fillStyle = '#1C1917';
-      ctx.fillRect(30, 33, 3, 3);
-      ctx.fillRect(47, 33, 3, 3);
-
-      this.cache[`portrait_${outfit}`] = canvas;
+    PORTRAIT_EXPRESSIONS.forEach(expr => {
+      ['academic', 'lab', 'rig'].forEach(outfit => {
+        const { canvas, ctx } = createBuffer(80, 80);
+        this.drawExpressionPortrait(ctx, expr.id, outfit);
+        this.cache[`portrait_${expr.id}_${outfit}`] = canvas;
+      });
+      // Default to rig outfit for quick lookup
+      this.cache[`portrait_${expr.id}`] = this.cache[`portrait_${expr.id}_rig`];
     });
+
+    // Retain legacy keys defaulting to wicked smirk
+    ['academic', 'lab', 'rig'].forEach(outfit => {
+      this.cache[`portrait_${outfit}`] = this.cache[`portrait_wicked_smirk_${outfit}`];
+    });
+  }
+
+  drawExpressionPortrait(ctx, exprId, outfit) {
+    // 1. Frame & Slate Background
+    ctx.fillStyle = '#0F172A';
+    ctx.fillRect(0, 0, 80, 80);
+    ctx.fillStyle = '#1E293B';
+    ctx.fillRect(2, 2, 76, 76);
+
+    // 2. Torso / Shoulders based on outfit
+    let shirt = outfit === 'rig' ? '#EA580C' : outfit === 'lab' ? '#334155' : '#1E3A8A';
+    let skin = exprId === 'shift_zombie' ? '#D1D5DB' : '#F5D0A9';
+
+    ctx.fillStyle = shirt;
+    ctx.fillRect(16, 54, 48, 22);
+
+    if (outfit === 'rig') {
+      // Hi-vis reflective silver stripe
+      ctx.fillStyle = '#E2E8F0';
+      ctx.fillRect(16, 62, 48, 4);
+    } else if (outfit === 'lab') {
+      // Lab ID Badge lanyard
+      ctx.strokeStyle = '#38BDF8';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(36, 58, 8, 12);
+    }
+
+    // 3. Neck & Base Face
+    ctx.fillStyle = skin;
+    ctx.fillRect(32, 46, 16, 10); // Neck
+    ctx.fillRect(22, 18, 36, 32); // Face box
+    ctx.fillRect(18, 26, 4, 8);   // Left ear
+    ctx.fillRect(58, 26, 4, 8);   // Right ear
+
+    // 4. Base Hair / Hard Hat
+    if (outfit === 'rig') {
+      const hatY = exprId === 'blowout_sweat' ? 6 : 10;
+      ctx.fillStyle = '#FACC15';
+      ctx.fillRect(18, hatY, 44, 14); // helmet dome
+      ctx.fillRect(14, hatY + 12, 52, 4); // helmet brim
+      // ONGC red dot
+      ctx.fillStyle = '#B91C1C';
+      ctx.fillRect(38, hatY + 4, 4, 4);
+    } else {
+      ctx.fillStyle = '#1C1917';
+      ctx.fillRect(20, 10, 40, 12); // hair top
+      ctx.fillRect(18, 18, 6, 8);   // sideburn left
+      ctx.fillRect(56, 18, 6, 8);   // sideburn right
+    }
+
+    // 5. 10 SPECIFIC FACIAL EXPRESSIONS
+    switch (exprId) {
+      case 'wicked_smirk': {
+        // Asymmetric wicked eyebrows
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(24, 25, 10, 2); // left brow angled high
+        ctx.fillRect(46, 29, 10, 2); // right brow lowered
+        // Narrowed confident eyes
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(26, 30, 8, 3);
+        ctx.fillRect(46, 31, 8, 3);
+        // Glasses with diagonal anime glint
+        ctx.strokeStyle = '#38BDF8';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(24, 28, 12, 8);
+        ctx.strokeRect(44, 28, 12, 8);
+        ctx.beginPath();
+        ctx.moveTo(36, 32); ctx.lineTo(44, 32);
+        ctx.stroke();
+        // Anime glint slash across left lens
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(25, 34); ctx.lineTo(34, 28);
+        ctx.stroke();
+        // Sparkle star at glint tip
+        ctx.fillStyle = '#FEF08A';
+        ctx.fillRect(34, 27, 2, 2);
+        ctx.fillRect(33, 26, 4, 1);
+        ctx.fillRect(34, 25, 1, 4);
+        // Wicked smirk mouth (curves high right)
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(32, 42, 14, 3);
+        ctx.fillRect(44, 40, 4, 3);
+        // Sharp canine glint
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(42, 42, 3, 2);
+        break;
+      }
+
+      case 'caffeine_overdrive': {
+        // High vibrating eyebrows
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(22, 22, 12, 2);
+        ctx.fillRect(46, 22, 12, 2);
+        // Giant wide bloodshot eyes
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(24, 25, 12, 9);
+        ctx.fillRect(44, 25, 12, 9);
+        // Red veins
+        ctx.fillStyle = '#EF4444';
+        ctx.fillRect(24, 26, 3, 1);
+        ctx.fillRect(33, 31, 3, 1);
+        ctx.fillRect(44, 31, 3, 1);
+        ctx.fillRect(53, 26, 3, 1);
+        // Tiny pinpoint dilated pupils
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(29, 28, 3, 3);
+        ctx.fillRect(49, 28, 3, 3);
+        // Wide open hyper grin with jagged zigzag teeth
+        ctx.fillStyle = '#7F1D1D';
+        ctx.fillRect(28, 38, 24, 8);
+        ctx.fillStyle = '#FFFFFF';
+        for (let i = 0; i < 6; i++) {
+          ctx.fillRect(28 + i * 4, 38, 2, 3); // top teeth
+          ctx.fillRect(30 + i * 4, 43, 2, 3); // bottom teeth
+        }
+        // Rising steam puffs above head
+        ctx.fillStyle = '#CBD5E1';
+        ctx.fillRect(22, 4, 3, 3);
+        ctx.fillRect(26, 2, 3, 3);
+        ctx.fillRect(50, 4, 3, 3);
+        ctx.fillRect(54, 2, 3, 3);
+        break;
+      }
+
+      case 'loupe_cyclops': {
+        // Right eye squinted shut in focus
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(46, 26, 10, 2); // brow
+        ctx.fillRect(46, 30, 8, 2);  // squint line
+        ctx.fillRect(52, 32, 3, 2);
+        // LEFT EYE: GIANT 10x PETROLOGICAL LOUPE
+        // Brass metallic rim
+        ctx.fillStyle = '#D97706';
+        ctx.beginPath();
+        ctx.arc(30, 31, 13, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#F59E0B';
+        ctx.beginPath();
+        ctx.arc(30, 31, 11, 0, Math.PI * 2);
+        ctx.fill();
+        // Cyan-tinted magnified lens glass
+        ctx.fillStyle = '#E0F2FE';
+        ctx.beginPath();
+        ctx.arc(30, 31, 9, 0, Math.PI * 2);
+        ctx.fill();
+        // Magnified gigantic iris & pupil
+        ctx.fillStyle = '#451A03';
+        ctx.beginPath();
+        ctx.arc(30, 31, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#000000';
+        ctx.beginPath();
+        ctx.arc(30, 31, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+        // Reflection highlight
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(28, 28, 3, 3);
+        // Metal hinge handle
+        ctx.fillStyle = '#B45309';
+        ctx.fillRect(18, 39, 6, 4);
+        ctx.fillRect(14, 42, 6, 4);
+        // Concentrated mouth with tongue sticking out
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(36, 42, 10, 2);
+        ctx.fillStyle = '#F43F5E';
+        ctx.fillRect(44, 42, 5, 5); // pink tongue
+        break;
+      }
+
+      case 'blowout_sweat': {
+        // Tilted vibrating hard hat motion lines
+        ctx.fillStyle = '#38BDF8';
+        ctx.fillRect(16, 2, 4, 2);
+        ctx.fillRect(60, 2, 4, 2);
+        // Worried high wavy eyebrows
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(24, 24, 10, 2);
+        ctx.fillRect(46, 24, 10, 2);
+        // Wide panicked eyes looking at telemetry
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(24, 28, 10, 7);
+        ctx.fillRect(46, 28, 10, 7);
+        ctx.fillStyle = '#0F172A';
+        ctx.fillRect(28, 31, 4, 4);
+        ctx.fillRect(50, 31, 4, 4);
+        // Flying blue comic sweat droplets
+        ctx.fillStyle = '#38BDF8';
+        ctx.fillRect(15, 20, 3, 5); // left splash
+        ctx.fillRect(12, 23, 2, 3);
+        ctx.fillRect(62, 20, 3, 5); // right splash
+        ctx.fillRect(65, 23, 2, 3);
+        // Gritted clenched teeth mouth
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(28, 40, 24, 7);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(29, 41, 22, 5);
+        ctx.fillStyle = '#1C1917';
+        for (let t = 0; t < 5; t++) {
+          ctx.fillRect(32 + t * 4, 41, 1, 5); // vertical teeth slits
+        }
+        break;
+      }
+
+      case 'helium_chipmunk': {
+        // Giant round puffed cheeks bulging out
+        ctx.fillStyle = '#FDA4AF';
+        ctx.beginPath();
+        ctx.arc(22, 36, 8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(58, 36, 8, 0, Math.PI * 2);
+        ctx.fill();
+        // Starry 4-point yellow sparkle eyes
+        const drawStarEye = (cx, cy) => {
+          ctx.fillStyle = '#FACC15';
+          ctx.fillRect(cx - 1, cy - 5, 3, 11);
+          ctx.fillRect(cx - 5, cy - 1, 11, 3);
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(cx, cy, 1, 1);
+        };
+        drawStarEye(30, 29);
+        drawStarEye(50, 29);
+        // Tiny 'o' shaped high-pitch whistling mouth
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(38, 41, 5, 5);
+        ctx.fillStyle = '#F43F5E';
+        ctx.fillRect(39, 42, 3, 3);
+        // Floating cyan helium bubbles around head
+        ctx.strokeStyle = '#38BDF8';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(12, 14, 4, 0, Math.PI * 2);
+        ctx.arc(68, 12, 5, 0, Math.PI * 2);
+        ctx.arc(66, 26, 3, 0, Math.PI * 2);
+        ctx.stroke();
+        break;
+      }
+
+      case 'matrix_hacker': {
+        // Dark wrap-around sunglasses
+        ctx.fillStyle = '#020617';
+        ctx.fillRect(22, 26, 36, 12);
+        // Neon green & cyan matrix code & seismic wave on lenses
+        ctx.fillStyle = '#22C55E';
+        ctx.fillRect(25, 28, 2, 3);
+        ctx.fillRect(29, 31, 2, 4);
+        ctx.fillRect(33, 27, 2, 5);
+        ctx.fillStyle = '#06B6D4';
+        ctx.fillRect(45, 28, 2, 5);
+        ctx.fillRect(49, 32, 2, 3);
+        ctx.fillRect(53, 27, 2, 4);
+        // Seismic wave horizon across bottom of glasses
+        ctx.fillStyle = '#4ADE80';
+        ctx.fillRect(24, 35, 4, 1);
+        ctx.fillRect(28, 34, 4, 1);
+        ctx.fillRect(32, 36, 3, 1);
+        ctx.fillRect(45, 34, 4, 1);
+        ctx.fillRect(49, 36, 4, 1);
+        ctx.fillRect(53, 35, 3, 1);
+        // Cool one-sided knowing smirk
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(34, 42, 12, 2);
+        ctx.fillRect(44, 40, 3, 3);
+        // Cyberpunk rim glow on jaw
+        ctx.fillStyle = 'rgba(6, 182, 212, 0.4)';
+        ctx.fillRect(22, 48, 36, 2);
+        break;
+      }
+
+      case 'centre_back': {
+        // Red and white athletic sweatband across forehead
+        ctx.fillStyle = '#DC2626';
+        ctx.fillRect(20, 18, 40, 6);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(20, 20, 40, 2);
+        // Furrowed angry V-shaped thick black eyebrows
+        ctx.fillStyle = '#000000';
+        ctx.beginPath();
+        ctx.moveTo(22, 25); ctx.lineTo(34, 28);
+        ctx.lineTo(34, 30); ctx.lineTo(22, 27);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(58, 25); ctx.lineTo(46, 28);
+        ctx.lineTo(46, 30); ctx.lineTo(58, 27);
+        ctx.fill();
+        // Fierce narrowed intense eyes
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(26, 30, 7, 3);
+        ctx.fillRect(47, 30, 7, 3);
+        // Turf dirt battle smudge on left cheek
+        ctx.fillStyle = '#78350F';
+        ctx.fillRect(24, 38, 4, 3);
+        ctx.fillRect(26, 36, 3, 2);
+        // Athletic grit jaw clenched scowl
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(32, 42, 16, 3);
+        ctx.fillRect(31, 44, 3, 2);
+        break;
+      }
+
+      case 'kimberlite_eureka': {
+        // Wide arched surprised eyebrows
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(24, 23, 10, 2);
+        ctx.fillRect(46, 23, 10, 2);
+        // Left Eye: Sparkling Deep Purple G10 Pyrope Garnet Crystal
+        ctx.fillStyle = '#7E22CE';
+        ctx.fillRect(25, 27, 9, 9);
+        ctx.fillStyle = '#C084FC';
+        ctx.fillRect(27, 29, 5, 5);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(28, 28, 2, 2);
+        // Right Eye: Sparkling Cyan/White Diamond Facet
+        ctx.fillStyle = '#0891B2';
+        ctx.fillRect(46, 27, 9, 9);
+        ctx.fillStyle = '#67E8F9';
+        ctx.fillRect(48, 29, 5, 5);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(49, 28, 2, 2);
+        // Ecstatic jaw-dropped mouth
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(30, 38, 20, 10);
+        ctx.fillStyle = '#F43F5E';
+        ctx.fillRect(34, 43, 12, 5); // pink tongue
+        // Diamond sparkles popping around head
+        ctx.fillStyle = '#FACC15';
+        ctx.fillRect(14, 12, 3, 3);
+        ctx.fillRect(15, 10, 1, 7);
+        ctx.fillRect(64, 14, 3, 3);
+        ctx.fillRect(65, 12, 1, 7);
+        break;
+      }
+
+      case 'shift_zombie': {
+        // Heavy dark purple eye bags
+        ctx.fillStyle = '#581C87';
+        ctx.fillRect(22, 32, 14, 5);
+        ctx.fillRect(44, 32, 14, 5);
+        // Drooping half-closed exhausted eyes
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(24, 28, 10, 5);
+        ctx.fillRect(46, 28, 10, 5);
+        // Heavy drooping eyelids covering half of eye
+        ctx.fillStyle = '#D1D5DB';
+        ctx.fillRect(24, 27, 10, 3);
+        ctx.fillRect(46, 27, 10, 3);
+        ctx.fillStyle = '#0F172A';
+        ctx.fillRect(27, 30, 4, 3);
+        ctx.fillRect(49, 30, 4, 3);
+        // Exhausted wavy flat mouth
+        ctx.fillStyle = '#4B5563';
+        ctx.fillRect(32, 42, 6, 2);
+        ctx.fillRect(38, 43, 6, 2);
+        ctx.fillRect(44, 42, 4, 2);
+        // Clenched red coffee mug in bottom-right corner
+        ctx.fillStyle = '#DC2626';
+        ctx.fillRect(54, 56, 12, 14);
+        ctx.fillStyle = '#78350F';
+        ctx.fillRect(56, 54, 8, 3); // dark coffee
+        ctx.fillStyle = '#E2E8F0';
+        ctx.fillRect(66, 60, 4, 6); // handle
+        break;
+      }
+
+      case 'deal_with_it': {
+        // Golden explorer halo / aura on top of head
+        ctx.fillStyle = '#FACC15';
+        ctx.fillRect(24, 4, 32, 2);
+        // Stepped 8-bit black pixel sunglasses
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(20, 27, 16, 9); // left lens
+        ctx.fillRect(44, 27, 16, 9); // right lens
+        ctx.fillRect(36, 29, 8, 3);  // bridge
+        // White pixel highlight on left lens corner
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(22, 28, 2, 2);
+        ctx.fillRect(46, 28, 2, 2);
+        // Smirk with golden toothpick
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(34, 42, 14, 2);
+        ctx.fillRect(46, 40, 3, 3);
+        // Golden toothpick
+        ctx.fillStyle = '#F59E0B';
+        ctx.fillRect(46, 41, 8, 2);
+        // Golden coin sparkle star in top-right
+        ctx.fillStyle = '#FACC15';
+        ctx.fillRect(68, 6, 4, 4);
+        ctx.fillRect(69, 4, 2, 8);
+        ctx.fillRect(66, 7, 8, 2);
+        break;
+      }
+    }
   }
 }
 
@@ -1889,7 +2380,9 @@ class PlayerAvatar {
   constructor(x, y) {
     this.x = x;
     this.y = y;
+    this.baseSpeed = 2.8;
     this.speed = 2.8;
+    this.isGodMode = false;
     this.direction = 'down';
     this.walkFrame = 0;
     this.walkTimer = 0;
@@ -1981,8 +2474,9 @@ class PlayerAvatar {
       this.idleTime = 0;
       this.idleType = 'none';
 
-      const nx = this.x + dx * this.speed;
-      const ny = this.y + dy * this.speed;
+      const moveSpeed = this.baseSpeed * (this.isGodMode ? 2.5 : 1.0);
+      const nx = this.x + dx * moveSpeed;
+      const ny = this.y + dy * moveSpeed;
 
       let moved = false;
       if (!map.isSolid(nx - 9, this.y + 12)) {
@@ -2072,7 +2566,14 @@ class PlayerAvatar {
     this.actionState = 'hammer';
     this.actionTimer = 0.35;
     audio.playHammer();
-    this.showBubble("*CLANG!* Fresh rock surface cleaved!", 1.8);
+    if (this.isGodMode) {
+      this.showBubble("💎👑 GOD MODE: EXPLODING DIAMONDS & OIL GUSHERS!", 2.2);
+      if (window.gameEngine) {
+        window.gameEngine.spawnGodModeExplosion(this.x, this.y);
+      }
+    } else {
+      this.showBubble("*CLANG!* Fresh rock surface cleaved!", 1.8);
+    }
   }
 
   inspectLens() {
@@ -2121,6 +2622,20 @@ class PlayerAvatar {
   render(ctx, cam) {
     const sx = Math.round(this.x - cam.x - 16);
     const sy = Math.round(this.y - cam.y - 16);
+
+    // Golden aura in God Mode
+    if (this.isGodMode) {
+      ctx.save();
+      const pulse = 1.0 + Math.sin(performance.now() / 120) * 0.25;
+      ctx.strokeStyle = '#FACC15';
+      ctx.lineWidth = 3;
+      ctx.shadowColor = '#F59E0B';
+      ctx.shadowBlur = 12 * pulse;
+      ctx.beginPath();
+      ctx.ellipse(sx + 16, sy + 28, 14 * pulse, 6 * pulse, 0, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.restore();
+    }
 
     let key = null;
     if (this.actionState === 'hammer') {
@@ -2185,6 +2700,8 @@ class PlayerAvatar {
 // =============================================================================
 class GeologyQuestEngine {
   constructor() {
+    window.gameEngine = this;
+
     this.canvas = document.getElementById('rpg-canvas');
     this.ctx = this.canvas.getContext('2d');
     this.ctx.imageSmoothingEnabled = false;
@@ -2196,6 +2713,20 @@ class GeologyQuestEngine {
     this.camera = { x: 0, y: 0, width: this.viewWidth, height: this.viewHeight };
     this.map = new GameMap();
     this.player = new PlayerAvatar(8 * TILE_SIZE, 11 * TILE_SIZE);
+
+    // 10-Expression Engine State
+    this.currentExpression = 'wicked_smirk';
+
+    // Boss Mode Executive CV Studio State
+    this.isCvEditMode = false;
+    this.activeCvFilter = 'all';
+    this.activeCvTheme = 'white';
+
+    // Konami & God Mode State
+    this.konamiSequence = ['arrowup', 'arrowup', 'arrowdown', 'arrowdown', 'arrowleft', 'arrowright', 'arrowleft', 'arrowright', 'b', 'a'];
+    this.konamiProgress = 0;
+    this.hudPortraitClicks = 0;
+    this.hudPortraitClickTimer = null;
 
     // Navigation and soccer ball
     this.pulsingTarget = null;
@@ -2233,6 +2764,9 @@ class GeologyQuestEngine {
     this.resize();
     window.addEventListener('resize', () => this.resize());
 
+    // Print DevTools 16-Bit ASCII Art
+    this.printDevToolsAsciiArt();
+
     // Load data from career-data.json
     await this.loadCareerData();
 
@@ -2244,6 +2778,9 @@ class GeologyQuestEngine {
     this.bindStratigraphicElevator();
     this.bindKimberliteClassifier();
     this.bindSarSlider();
+    this.bindBossStudioEvents();
+    this.bindEasterEggEvents();
+    this.bindBackpackEvents();
     this.updateHUDPortrait();
 
     // Start loop
@@ -2330,11 +2867,47 @@ class GeologyQuestEngine {
     this.updateStatsUI();
   }
 
+  setExpression(exprId, playSound = false) {
+    const expr = PORTRAIT_EXPRESSIONS.find(e => e.id === exprId) || PORTRAIT_EXPRESSIONS[0];
+    this.currentExpression = expr.id;
+
+    // Update HUD Portrait
+    this.updateHUDPortrait();
+
+    // Update Dialog Portrait if dialog is open
+    const pCanvas = document.getElementById('dialog-portrait-canvas');
+    if (pCanvas) {
+      const ctx = pCanvas.getContext('2d');
+      const spr = sprites.get(`portrait_${this.currentExpression}_${this.player.outfit}`) ||
+                  sprites.get(`portrait_${this.currentExpression}`);
+      if (spr) {
+        ctx.clearRect(0, 0, 80, 80);
+        ctx.drawImage(spr, 0, 0, 80, 80);
+      }
+    }
+
+    // Update Dialog Mood Badge & Quote Bubble
+    const moodBadge = document.getElementById('dialog-mood-badge');
+    if (moodBadge) moodBadge.textContent = expr.name.replace(' (CHIEF EXPLORER)', '');
+    const quoteBubble = document.getElementById('dialog-quote-bubble');
+    if (quoteBubble) quoteBubble.textContent = `"${expr.quote}"`;
+
+    // Soundboard active mood label in backpack
+    const sbMoodLabel = document.getElementById('soundboard-active-mood');
+    if (sbMoodLabel) sbMoodLabel.textContent = expr.name.replace(' (CHIEF EXPLORER)', '');
+
+    if (playSound && audio && expr.sound) {
+      audio.playTone(expr.sound.freq, expr.sound.type, expr.sound.duration, 0.2);
+    }
+  }
+
   updateHUDPortrait() {
     const pCanvas = document.getElementById('hud-portrait-canvas');
     if (pCanvas) {
       const ctx = pCanvas.getContext('2d');
-      const spr = sprites.get(`portrait_${this.player.outfit}`);
+      const spr = sprites.get(`portrait_${this.currentExpression}_${this.player.outfit}`) ||
+                  sprites.get(`portrait_${this.currentExpression}`) ||
+                  sprites.get(`portrait_${this.player.outfit}`);
       if (spr) {
         ctx.clearRect(0, 0, 40, 40);
         ctx.drawImage(spr, 0, 0, 40, 40);
@@ -2344,8 +2917,30 @@ class GeologyQuestEngine {
 
   bindInputs() {
     window.addEventListener('keydown', (e) => {
-      // Don't intercept if typing in an input
-      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+      // Petrel Ctrl+S rescue shortcut check
+      if ((e.ctrlKey || e.metaKey) && (e.key.toLowerCase() === 's')) {
+        const petrelModal = document.getElementById('modal-petrel-crash');
+        if (petrelModal && !petrelModal.classList.contains('hidden')) {
+          e.preventDefault();
+          this.rescuePetrelProject();
+          return;
+        }
+      }
+
+      // Don't intercept if typing in an input or contenteditable
+      if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) return;
+
+      // Konami code check
+      const k = e.key.toLowerCase();
+      if (k === this.konamiSequence[this.konamiProgress]) {
+        this.konamiProgress++;
+        if (this.konamiProgress === this.konamiSequence.length) {
+          this.konamiProgress = 0;
+          this.activateChiefExplorerGodMode();
+        }
+      } else {
+        this.konamiProgress = (k === this.konamiSequence[0]) ? 1 : 0;
+      }
 
       switch (e.key.toLowerCase()) {
         case 'arrowleft': case 'a': this.input.left = true; break;
@@ -2353,8 +2948,14 @@ class GeologyQuestEngine {
         case 'arrowup': case 'w': this.input.up = true; break;
         case 'arrowdown': case 's': this.input.down = true; break;
         case 'h': this.player.strikeHammer(); break;
-        case 'm': this.player.inspectLens(); break;
-        case 'f': this.player.slideTackle(); break;
+        case 'm':
+          this.player.inspectLens();
+          this.setExpression('loupe_cyclops', false);
+          break;
+        case 'f':
+          this.player.slideTackle();
+          this.setExpression('centre_back', false);
+          break;
         case ' ':
         case 'e':
           e.preventDefault();
@@ -2420,6 +3021,20 @@ class GeologyQuestEngine {
             this.updateHUDPortrait();
           }
           audio.playTone(600, 'square', 0.05, 0.1);
+        }
+      });
+    }
+
+    // 5-Click Portrait Easter Egg (God Mode Trigger)
+    const cvsPortrait = document.getElementById('hud-portrait-canvas');
+    if (cvsPortrait) {
+      cvsPortrait.addEventListener('click', () => {
+        this.hudPortraitClicks++;
+        clearTimeout(this.hudPortraitClickTimer);
+        this.hudPortraitClickTimer = setTimeout(() => { this.hudPortraitClicks = 0; }, 2500);
+        if (this.hudPortraitClicks >= 5) {
+          this.hudPortraitClicks = 0;
+          this.activateChiefExplorerGodMode();
         }
       });
     }
@@ -2586,7 +3201,7 @@ class GeologyQuestEngine {
       cement: "Doghouse copy: Active Wellsite frontline ops at GDA-A Samastipur exploratory well (8.5\" phase). Supervised open-ended drill pipe cement squeeze operation, verified slurry placement, and maintained 0 LTI safety standards.",
       petrel: "Doghouse copy: 2.5+ years interpretation geologist for Vindhyan Block. Extensive modeling in Schlumberger Petrel, Eliis PaleoScan RGT, QGIS, DSPetrophysics. Successfully generated and defended drillable exploration prospects in BExB & EPMB blocks.",
       thesis: "Doghouse copy: M.Sc. Tech thesis from IIT (ISM) Dhanbad: Engineered supervised Machine Learning models on EPMA garnet geochemistry to predict parent host rock provenance for kimberlitic diamond exploration.",
-      pda: "Doghouse copy: Active 24/7 surveillance: Real-time Pore Pressure Prediction, PDA drilling parameter tracking, binocular cuttings lithology, UV hydrocarbon fluorescence cuts, and C1-C5 chromatograph gas analysis.",
+      pda: "Doghouse copy: Post Drill Analysis (PDA): Rigorous post-drill geological analysis correlating pre-drill prognosis vs actual drilled formation tops, lithologies, hydrocarbon shows, and pore pressure trends for integrated basin modeling.",
       sports: "Doghouse copy: Athletic record: Starting Centre-Back across 4 seasons for IIT ISM & Jadavpur. Winner of Inter-Departmental Football Championship '22. High-altitude alpine trekker across Dafeybhir Pass, Sikkim!"
     };
 
@@ -2601,7 +3216,7 @@ class GeologyQuestEngine {
         reply = answers.petrel;
       } else if (qLower.includes('thesis') || qLower.includes('diamond') || qLower.includes('machine learning') || qLower.includes('epma')) {
         reply = answers.thesis;
-      } else if (qLower.includes('pda') || qLower.includes('pressure') || qLower.includes('gas') || qLower.includes('kick')) {
+      } else if (qLower.includes('pda') || qLower.includes('post drill') || qLower.includes('post-drill')) {
         reply = answers.pda;
       } else if (qLower.includes('football') || qLower.includes('fitness') || qLower.includes('sports') || qLower.includes('gym')) {
         reply = answers.sports;
@@ -2656,20 +3271,113 @@ class GeologyQuestEngine {
   }
 
   openBackpack() {
-    const p = window.CAREER_DATA.player;
-    this.openHotspotModal("Geological Expedition Backpack", `
-      <h4>EQUIPPED FIELD & OPERATIONAL GEAR:</h4>
-      <ul>
-        <li>🔨 <strong>Estwing Rock Hammer:</strong> Fresh outcrop cleavage & mineral strike (Press [H]).</li>
-        <li>🔍 <strong>10x Bausch & Lomb Loupe:</strong> Petrographic hand lens inspection (Press [M]).</li>
-        <li>⚽ <strong>Centre-Back Cleats:</strong> Slide tackle maneuver (Press [F]).</li>
-        <li>🪖 <strong>Wellsite PPE:</strong> Hard Hat & High-Vis Vest (Auto-equips on Rig Floor).</li>
-        <li>☕ <strong>3 AM Doghouse Mug:</strong> Infinite caffeine supply for pore pressure surveillance.</li>
-        <li>💻 <strong>Interpretation Arsenal:</strong> Schlumberger Petrel, Eliis PaleoScan, DSPetrophysics, QGIS.</li>
-      </ul>
-      <h4>CURRENT PILOT:</h4>
-      <p><strong>${p.name}</strong> (${p.title}) &bull; CPF: ${p.cpf} &bull; DOJ: ${p.doj}</p>
-    `);
+    this.closeAllModals();
+    this.switchBackpackTab('gear');
+    this.renderSoundboard();
+    document.getElementById('modal-backpack').classList.remove('hidden');
+    audio.playTone(660, 'sine', 0.1, 0.2);
+  }
+
+  bindBackpackEvents() {
+    const tabGear = document.getElementById('tab-backpack-gear');
+    const tabExpr = document.getElementById('tab-backpack-expressions');
+    const btnClose = document.getElementById('btn-close-backpack');
+    const btnApply = document.getElementById('btn-apply-expression');
+
+    if (tabGear) tabGear.onclick = () => this.switchBackpackTab('gear');
+    if (tabExpr) tabExpr.onclick = () => this.switchBackpackTab('expressions');
+    if (btnClose) btnClose.onclick = () => this.closeAllModals();
+    if (btnApply) {
+      btnApply.onclick = () => {
+        this.setExpression(this.soundboardSelectedExpr || this.currentExpression, true);
+        audio.playFanfare();
+        this.player.showBubble(`✨ Mood set to ${this.soundboardSelectedExpr || this.currentExpression}!`, 2.0);
+      };
+    }
+  }
+
+  switchBackpackTab(tab) {
+    const paneGear = document.getElementById('pane-backpack-gear');
+    const paneExpr = document.getElementById('pane-backpack-expressions');
+    const tabGear = document.getElementById('tab-backpack-gear');
+    const tabExpr = document.getElementById('tab-backpack-expressions');
+    if (!paneGear || !paneExpr) return;
+
+    if (tab === 'gear') {
+      paneGear.classList.remove('hidden');
+      paneExpr.classList.add('hidden');
+      tabGear.classList.add('tab-active', 'is-primary');
+      tabExpr.classList.remove('tab-active', 'is-primary');
+    } else {
+      paneGear.classList.add('hidden');
+      paneExpr.classList.remove('hidden');
+      tabExpr.classList.add('tab-active', 'is-primary');
+      tabGear.classList.remove('tab-active', 'is-primary');
+      this.renderSoundboard();
+    }
+  }
+
+  renderSoundboard() {
+    const grid = document.getElementById('soundboard-grid');
+    if (!grid) return;
+    grid.innerHTML = '';
+
+    PORTRAIT_EXPRESSIONS.forEach(expr => {
+      const card = document.createElement('div');
+      card.className = `soundboard-card ${expr.id === this.currentExpression ? 'active' : ''}`;
+      card.dataset.expr = expr.id;
+
+      const canvas = document.createElement('canvas');
+      canvas.width = 64;
+      canvas.height = 64;
+      canvas.className = 'sb-card-canvas';
+      const cctx = canvas.getContext('2d');
+      const spr = sprites.get(`portrait_${expr.id}_${this.player.outfit}`) || sprites.get(`portrait_${expr.id}`);
+      if (spr) cctx.drawImage(spr, 0, 0, 64, 64);
+
+      const name = document.createElement('div');
+      name.className = 'sb-card-name';
+      name.textContent = expr.name.replace(' (CHIEF EXPLORER)', '');
+
+      card.appendChild(canvas);
+      card.appendChild(name);
+
+      card.addEventListener('click', () => {
+        this.selectSoundboardExpression(expr.id);
+      });
+
+      grid.appendChild(card);
+    });
+
+    this.soundboardSelectedExpr = this.currentExpression;
+    this.updateSoundboardPreview(this.currentExpression);
+  }
+
+  selectSoundboardExpression(exprId) {
+    this.soundboardSelectedExpr = exprId;
+    this.setExpression(exprId, true);
+    this.updateSoundboardPreview(exprId);
+    document.querySelectorAll('.soundboard-card').forEach(c => {
+      c.classList.toggle('active', c.dataset.expr === exprId);
+    });
+  }
+
+  updateSoundboardPreview(exprId) {
+    const expr = PORTRAIT_EXPRESSIONS.find(e => e.id === exprId) || PORTRAIT_EXPRESSIONS[0];
+    const prevCanvas = document.getElementById('soundboard-preview-canvas');
+    if (prevCanvas) {
+      const ctx = prevCanvas.getContext('2d');
+      ctx.clearRect(0, 0, 80, 80);
+      const spr = sprites.get(`portrait_${expr.id}_${this.player.outfit}`) || sprites.get(`portrait_${expr.id}`);
+      if (spr) ctx.drawImage(spr, 0, 0, 80, 80);
+    }
+
+    const title = document.getElementById('sb-preview-title');
+    if (title) title.textContent = expr.name;
+    const quote = document.getElementById('sb-preview-quote');
+    if (quote) quote.textContent = `"${expr.quote}"`;
+    const trig = document.getElementById('sb-preview-trigger');
+    if (trig) trig.textContent = `Trigger: ${expr.triggerText}`;
   }
 
   openLiveUpdater() {
@@ -2849,17 +3557,54 @@ class GeologyQuestEngine {
     }
   }
 
-  openHotspotModal(title, html) {
+  openHotspotModal(title, html, exprId = null) {
     this.closeAllModals();
     document.getElementById('modal-hotspot-title').textContent = title;
     document.getElementById('modal-hotspot-content').innerHTML = html;
 
+    // Pick contextual expression if specified, or auto-detect based on topic
+    if (exprId) {
+      this.setExpression(exprId, false);
+    } else {
+      const lower = title.toLowerCase();
+      if (lower.includes('petrel') || lower.includes('prospect') || lower.includes('bexb') || lower.includes('epmb') || lower.includes('seismic')) {
+        this.setExpression('wicked_smirk', false);
+      } else if (lower.includes('h2') || lower.includes('helium') || lower.includes('unconventional')) {
+        this.setExpression('helium_chipmunk', false);
+      } else if (lower.includes('rig') || lower.includes('doghouse') || lower.includes('kick') || lower.includes('cement')) {
+        this.setExpression('blowout_sweat', false);
+      } else if (lower.includes('sar') || lower.includes('python') || lower.includes('machine learning')) {
+        this.setExpression('matrix_hacker', false);
+      } else if (lower.includes('epma') || lower.includes('diamond') || lower.includes('garnet') || lower.includes('fossil')) {
+        this.setExpression('kimberlite_eureka', false);
+      } else if (lower.includes('coffee') || lower.includes('shift')) {
+        this.setExpression('caffeine_overdrive', false);
+      } else if (lower.includes('football') || lower.includes('gym') || lower.includes('athletics')) {
+        this.setExpression('centre_back', false);
+      } else if (lower.includes('outcrop') || lower.includes('field') || lower.includes('loupe') || lower.includes('cuttings')) {
+        this.setExpression('loupe_cyclops', false);
+      } else {
+        this.setExpression(this.currentExpression || 'wicked_smirk', false);
+      }
+    }
+
     const pCanvas = document.getElementById('dialog-portrait-canvas');
     if (pCanvas) {
       const ctx = pCanvas.getContext('2d');
-      const spr = sprites.get(`portrait_${this.player.outfit}`);
-      if (spr) ctx.drawImage(spr, 0, 0, 80, 80);
+      const spr = sprites.get(`portrait_${this.currentExpression}_${this.player.outfit}`) ||
+                  sprites.get(`portrait_${this.currentExpression}`) ||
+                  sprites.get(`portrait_${this.player.outfit}`);
+      if (spr) {
+        ctx.clearRect(0, 0, 80, 80);
+        ctx.drawImage(spr, 0, 0, 80, 80);
+      }
     }
+
+    const expr = PORTRAIT_EXPRESSIONS.find(e => e.id === this.currentExpression) || PORTRAIT_EXPRESSIONS[0];
+    const moodBadge = document.getElementById('dialog-mood-badge');
+    if (moodBadge) moodBadge.textContent = expr.name.replace(' (CHIEF EXPLORER)', '');
+    const quoteBubble = document.getElementById('dialog-quote-bubble');
+    if (quoteBubble) quoteBubble.textContent = `"${expr.quote}"`;
 
     document.getElementById('modal-hotspot').classList.remove('hidden');
     audio.playTone(880, 'sine', 0.1, 0.15);
@@ -2962,6 +3707,16 @@ class GeologyQuestEngine {
           <li>24/7 lithological cuttings surveillance under binocular microscope.</li>
           <li>Direct ultraviolet fluorescence testing and chemical solvent cut evaluation.</li>
           <li>Total Gas and C1 to C5 chromatographic breakout analysis.</li>
+        </ul>
+      `);
+    } else if (id === 'hotspot_pda_lab') {
+      this.openHotspotModal(title, `
+        <h4>Subsurface Post Drill Analysis (PDA) &amp; 3D MEM Station</h4>
+        <p>Comprehensive post-drill geological synthesis and reservoir geomechanical modeling:</p>
+        <ul>
+          <li><strong>Post Drill Analysis (PDA):</strong> Rigorous post-drill correlation between pre-drill prognosed stratigraphic tops and actual drilled lithologies, hydrocarbon shows, and well log responses to recalibrate basin risk.</li>
+          <li><strong>Relative Geologic Time (RGT):</strong> Constructing chronostratigraphic horizons and Wheeler diagrams in Eliis PaleoScan.</li>
+          <li><strong>3D Mechanical Earth Model (MEM):</strong> In-situ stress tensor orientation, fracture gradient calibration, and fault seal integrity analysis in Son Valley &amp; Bhima-Kaladgi.</li>
         </ul>
       `);
     } else {
@@ -3731,16 +4486,24 @@ TECHNICAL SKILLS MATRIX
     const p = window.CAREER_DATA.player;
     const d = window.CAREER_DATA;
 
+    // Apply active theme
+    doc.className = `printable-paper theme-${this.activeCvTheme || 'white'} ${this.isCvEditMode ? 'cv-edit-active' : ''}`;
+
+    const tallyRows = d.operationsTally || DEFAULT_CAREER_DATA.operationsTally || [];
+    const reports = d.technicalReports || DEFAULT_CAREER_DATA.technicalReports || [];
+    const training = d.specializedTraining || DEFAULT_CAREER_DATA.specializedTraining || [];
+    const customSections = d.customSections || [];
+
     doc.innerHTML = `
-      <header class="res-header">
+      <header class="res-header cv-filter-target" data-filter="all interpretation wellsite ai">
         <div class="res-header-layout">
           <div class="res-header-info">
-            <h1 class="res-name">${p.name}</h1>
-            <h2 class="res-subtitle">${p.title} &bull; ${p.organization}</h2>
+            <h1 class="res-name editable-text" contenteditable="${this.isCvEditMode}">${p.name}</h1>
+            <h2 class="res-subtitle editable-text" contenteditable="${this.isCvEditMode}">${p.title} &bull; ${p.organization}</h2>
             <div class="res-meta">
-              <div><strong>CPF:</strong> ${p.cpf} &bull; <strong>DOJ:</strong> ${p.doj}</div>
-              <div><strong>Email:</strong> <a href="mailto:${p.email}">${p.email}</a> &bull; <strong>Phone:</strong> ${p.phone}</div>
-              <div><strong>LinkedIn:</strong> <a href="${p.linkedin}" target="_blank">rajdeep-tarafder</a> &bull; <strong>Location:</strong> ${p.location}</div>
+              <div><strong>CPF:</strong> <span class="editable-text" contenteditable="${this.isCvEditMode}">${p.cpf}</span> &bull; <strong>DOJ:</strong> <span class="editable-text" contenteditable="${this.isCvEditMode}">${p.doj}</span></div>
+              <div><strong>Email:</strong> <a href="mailto:${p.email}" class="editable-text" contenteditable="${this.isCvEditMode}">${p.email}</a> &bull; <strong>Phone:</strong> <span class="editable-text" contenteditable="${this.isCvEditMode}">${p.phone}</span></div>
+              <div><strong>LinkedIn:</strong> <a href="${p.linkedin}" target="_blank">rajdeep-tarafder</a> &bull; <strong>Location:</strong> <span class="editable-text" contenteditable="${this.isCvEditMode}">${p.location}</span></div>
             </div>
           </div>
           <div class="res-header-photo">
@@ -3749,84 +4512,618 @@ TECHNICAL SKILLS MATRIX
         </div>
       </header>
 
-      <section class="res-section">
+      <!-- 1. Executive Summary -->
+      <section class="res-section cv-filter-target" data-filter="all interpretation wellsite ai">
         <h3 class="res-section-title">Professional Executive Summary</h3>
-        <p class="res-summary">${p.summary}</p>
+        <p class="res-summary editable-text" contenteditable="${this.isCvEditMode}">${p.summary}</p>
       </section>
 
-      <section class="res-section">
-        <h3 class="res-section-title">Current & Recent Industry Track Record</h3>
-        ${(d.roles || []).map(r => `
-          <div class="res-job">
+      <!-- 2. Basin & Wellsite Operations Tally (Editable Table) -->
+      <section class="res-section cv-filter-target" data-filter="all interpretation wellsite">
+        <div class="res-job-head">
+          <h3 class="res-section-title" style="margin-bottom: 0;">Basin &amp; Wellsite Operations Tally</h3>
+          <div class="section-ctrl-bar ${this.isCvEditMode ? '' : 'hidden'}">
+            <button class="micro-btn add-bullet-btn" onclick="window.gameEngine.addTallyRow()">➕ Add Row</button>
+          </div>
+        </div>
+        <div class="tally-table-wrapper">
+          <table class="tally-table">
+            <thead>
+              <tr>
+                <th class="tally-th">Basin / Asset</th>
+                <th class="tally-th">Block / Target</th>
+                <th class="tally-th">Role &amp; Scale</th>
+                <th class="tally-th">Core Method / Tech</th>
+                <th class="tally-th">Milestone Impact</th>
+                <th class="tally-th edit-col ${this.isCvEditMode ? '' : 'hidden'}">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tally-table-body">
+              ${tallyRows.map((t, idx) => `
+                <tr class="tally-tr" data-idx="${idx}">
+                  <td class="tally-td editable-text" contenteditable="${this.isCvEditMode}">${t.basin}</td>
+                  <td class="tally-td editable-text" contenteditable="${this.isCvEditMode}">${t.block}</td>
+                  <td class="tally-td editable-text" contenteditable="${this.isCvEditMode}">${t.role}</td>
+                  <td class="tally-td editable-text" contenteditable="${this.isCvEditMode}">${t.method}</td>
+                  <td class="tally-td editable-text" contenteditable="${this.isCvEditMode}">${t.impact}</td>
+                  <td class="tally-td edit-col ${this.isCvEditMode ? '' : 'hidden'}">
+                    <span class="edit-micro-controls">
+                      <button class="micro-btn" onclick="window.gameEngine.reorderTallyRow(this, -1)" title="Move Up">⬆️</button>
+                      <button class="micro-btn" onclick="window.gameEngine.reorderTallyRow(this, 1)" title="Move Down">⬇️</button>
+                      <button class="micro-btn del-btn" onclick="window.gameEngine.deleteTallyRow(this)" title="Delete Row">🗑️</button>
+                    </span>
+                  </td>
+                </tr>
+              `).join('')}
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- 3. Current & Recent Industry Track Record -->
+      <section class="res-section cv-filter-target" data-filter="all interpretation wellsite">
+        <h3 class="res-section-title">Current &amp; Recent Industry Track Record</h3>
+        ${(d.roles || []).map((r, rIdx) => `
+          <div class="res-job cv-filter-target" data-filter="${r.id === 'wellsite_geologist' ? 'wellsite all' : 'interpretation all'}">
             <div class="res-job-head">
               <div>
-                <span class="res-job-title">${r.role}</span>
-                <span class="res-job-org">${r.company} ${r.group ? `&bull; ${r.group}` : ''}</span>
+                <span class="res-job-title editable-text" contenteditable="${this.isCvEditMode}">${r.role}</span>
+                <span class="res-job-org editable-text" contenteditable="${this.isCvEditMode}">${r.company} ${r.group ? `&bull; ${r.group}` : ''}</span>
               </div>
-              <span class="res-job-date">${r.period}</span>
+              <span class="res-job-date editable-text" contenteditable="${this.isCvEditMode}">${r.period}</span>
             </div>
-            <ul class="res-bullets">
-              ${r.highlights.map(h => `<li>${h}</li>`).join('')}
+            <ul class="res-bullets" data-role-idx="${rIdx}">
+              ${r.highlights.map((h, hIdx) => `
+                <li data-hidx="${hIdx}">
+                  <span class="editable-text" contenteditable="${this.isCvEditMode}">${h}</span>
+                  <span class="edit-micro-controls ${this.isCvEditMode ? '' : 'hidden'}">
+                    <button class="micro-btn del-btn" onclick="window.gameEngine.deleteCvBullet(this)">🗑️</button>
+                  </span>
+                </li>
+              `).join('')}
             </ul>
+            <div class="section-ctrl-bar ${this.isCvEditMode ? '' : 'hidden'}">
+              <button class="micro-btn add-bullet-btn" onclick="window.gameEngine.addRoleBullet(${rIdx})">➕ Add Bullet</button>
+            </div>
           </div>
         `).join('')}
       </section>
 
+      <!-- 4. Key Operational Milestones & Special Projects -->
       ${d.achievements && d.achievements.length > 0 ? `
-        <section class="res-section">
-          <h3 class="res-section-title">Key Operational Milestones & Special Projects</h3>
+        <section class="res-section cv-filter-target" data-filter="all interpretation wellsite ai">
+          <h3 class="res-section-title">Key Operational Milestones &amp; Special Projects</h3>
           <ul class="res-bullets">
-            ${d.achievements.map(a => `
-              <li><strong>${a.title} (${a.date}):</strong> ${a.description}</li>
+            ${d.achievements.map((a, aIdx) => `
+              <li data-aidx="${aIdx}">
+                <span class="editable-text" contenteditable="${this.isCvEditMode}"><strong>${a.title} (${a.date}):</strong> ${a.description}</span>
+                <span class="edit-micro-controls ${this.isCvEditMode ? '' : 'hidden'}">
+                  <button class="micro-btn del-btn" onclick="window.gameEngine.deleteCvBullet(this)">🗑️</button>
+                </span>
+              </li>
             `).join('')}
           </ul>
         </section>
       ` : ''}
 
-      <section class="res-section">
-        <h3 class="res-section-title">Academic Theses & Machine Learning Research</h3>
+      <!-- 5. Key Technical Reports & Research -->
+      <section class="res-section cv-filter-target" data-filter="all interpretation ai">
+        <div class="res-job-head">
+          <h3 class="res-section-title" style="margin-bottom: 0;">Key Technical Reports &amp; Research</h3>
+          <div class="section-ctrl-bar ${this.isCvEditMode ? '' : 'hidden'}">
+            <button class="micro-btn add-bullet-btn" onclick="window.gameEngine.addTechnicalReport()">➕ Add Report</button>
+          </div>
+        </div>
+        <ul class="res-bullets" id="reports-list">
+          ${reports.map((rep, idx) => `
+            <li data-ridx="${idx}">
+              <span class="editable-text" contenteditable="${this.isCvEditMode}">${rep}</span>
+              <span class="edit-micro-controls ${this.isCvEditMode ? '' : 'hidden'}">
+                <button class="micro-btn" onclick="window.gameEngine.reorderCvBullet(this, -1)">⬆️</button>
+                <button class="micro-btn" onclick="window.gameEngine.reorderCvBullet(this, 1)">⬇️</button>
+                <button class="micro-btn del-btn" onclick="window.gameEngine.deleteCvBullet(this)">🗑️</button>
+              </span>
+            </li>
+          `).join('')}
+        </ul>
+      </section>
+
+      <!-- 6. Specialized Operational & Technical Training -->
+      <section class="res-section cv-filter-target" data-filter="all wellsite ai">
+        <div class="res-job-head">
+          <h3 class="res-section-title" style="margin-bottom: 0;">Specialized Operational &amp; Technical Training</h3>
+          <div class="section-ctrl-bar ${this.isCvEditMode ? '' : 'hidden'}">
+            <button class="micro-btn add-bullet-btn" onclick="window.gameEngine.addTrainingItem()">➕ Add Training</button>
+          </div>
+        </div>
+        <ul class="res-bullets" id="training-list">
+          ${training.map((trn, idx) => `
+            <li data-tidx="${idx}">
+              <span class="editable-text" contenteditable="${this.isCvEditMode}">${trn}</span>
+              <span class="edit-micro-controls ${this.isCvEditMode ? '' : 'hidden'}">
+                <button class="micro-btn" onclick="window.gameEngine.reorderCvBullet(this, -1)">⬆️</button>
+                <button class="micro-btn" onclick="window.gameEngine.reorderCvBullet(this, 1)">⬇️</button>
+                <button class="micro-btn del-btn" onclick="window.gameEngine.deleteCvBullet(this)">🗑️</button>
+              </span>
+            </li>
+          `).join('')}
+        </ul>
+      </section>
+
+      <!-- 7. Academic Theses & Machine Learning Research -->
+      <section class="res-section cv-filter-target" data-filter="all ai interpretation">
+        <h3 class="res-section-title">Academic Theses &amp; Machine Learning Research</h3>
         ${(d.researchTheses || []).map(t => `
           <div class="res-job">
             <div class="res-job-head">
               <div>
-                <span class="res-job-title">${t.title}</span>
-                <span class="res-job-org">${t.type} &bull; ${t.institution}</span>
+                <span class="res-job-title editable-text" contenteditable="${this.isCvEditMode}">${t.title}</span>
+                <span class="res-job-org editable-text" contenteditable="${this.isCvEditMode}">${t.type} &bull; ${t.institution}</span>
               </div>
-              <span class="res-job-date">${t.period}</span>
+              <span class="res-job-date editable-text" contenteditable="${this.isCvEditMode}">${t.period}</span>
             </div>
-            <p class="res-summary">${t.description}</p>
+            <p class="res-summary editable-text" contenteditable="${this.isCvEditMode}">${t.description}</p>
           </div>
         `).join('')}
       </section>
 
-      <section class="res-section">
+      <!-- 8. Education -->
+      <section class="res-section cv-filter-target" data-filter="all">
         <h3 class="res-section-title">Education</h3>
         <div class="res-edu-grid">
           ${(d.education || []).map(e => `
             <div class="res-edu-card">
-              <div class="res-edu-deg">${e.degree}</div>
-              <div class="res-edu-inst">${e.institution}</div>
-              <div class="res-edu-score">${e.period} &bull; <strong>${e.score}</strong></div>
+              <div class="res-edu-deg editable-text" contenteditable="${this.isCvEditMode}">${e.degree}</div>
+              <div class="res-edu-inst editable-text" contenteditable="${this.isCvEditMode}">${e.institution}</div>
+              <div class="res-edu-score editable-text" contenteditable="${this.isCvEditMode}">${e.period} &bull; <strong>${e.score}</strong></div>
             </div>
           `).join('')}
         </div>
       </section>
 
-      <section class="res-section">
+      <!-- 9. Technical Skills Matrix -->
+      <section class="res-section cv-filter-target" data-filter="all interpretation wellsite ai">
         <h3 class="res-section-title">Technical Skills Matrix</h3>
-        <div class="res-skill-row"><span class="res-skill-label">Subsurface G&G:</span> ${(d.skills?.subsurface || []).join(' &bull; ')}</div>
-        <div class="res-skill-row"><span class="res-skill-label">Wellsite & Operations:</span> ${(d.skills?.wellsite || []).join(' &bull; ')}</div>
-        <div class="res-skill-row"><span class="res-skill-label">Unconventional Clean Energy:</span> ${(d.skills?.unconventional || []).join(' &bull; ')}</div>
-        <div class="res-skill-row"><span class="res-skill-label">Programming & Data Science:</span> ${(d.skills?.programming || []).join(' &bull; ')}</div>
+        <div class="res-skill-row cv-filter-target" data-filter="all interpretation">
+          <span class="res-skill-label">Subsurface G&amp;G:</span>
+          <span class="editable-text" contenteditable="${this.isCvEditMode}">${(d.skills?.subsurface || []).join(' &bull; ')}</span>
+        </div>
+        <div class="res-skill-row cv-filter-target" data-filter="all wellsite">
+          <span class="res-skill-label">Wellsite &amp; Operations:</span>
+          <span class="editable-text" contenteditable="${this.isCvEditMode}">${(d.skills?.wellsite || []).join(' &bull; ')}</span>
+        </div>
+        <div class="res-skill-row cv-filter-target" data-filter="all interpretation wellsite">
+          <span class="res-skill-label">Unconventional Clean Energy:</span>
+          <span class="editable-text" contenteditable="${this.isCvEditMode}">${(d.skills?.unconventional || []).join(' &bull; ')}</span>
+        </div>
+        <div class="res-skill-row cv-filter-target" data-filter="all ai">
+          <span class="res-skill-label">Programming &amp; Data Science:</span>
+          <span class="editable-text" contenteditable="${this.isCvEditMode}">${(d.skills?.programming || []).join(' &bull; ')}</span>
+        </div>
       </section>
 
-      <section class="res-section">
-        <h3 class="res-section-title">Certifications & Leadership</h3>
+      <!-- 10. Certifications & Leadership -->
+      <section class="res-section cv-filter-target" data-filter="all ai">
+        <h3 class="res-section-title">Certifications &amp; Coursera Specializations</h3>
         <div class="res-skill-row">
           ${(d.certifications || []).map(c => `&bull; <strong>${c.name}</strong> (${c.issuer})`).join('<br>')}
         </div>
       </section>
+
+      <!-- 11. Extracurriculars & Athletic Leadership -->
+      <section class="res-section cv-filter-target" data-filter="all">
+        <h3 class="res-section-title">Extracurriculars &amp; Athletic Leadership</h3>
+        <ul class="res-bullets">
+          ${(d.extracurriculars || []).map(ex => `
+            <li><strong>${ex.role} &bull; ${ex.event} (${ex.period}):</strong> ${ex.description}</li>
+          `).join('')}
+        </ul>
+      </section>
+
+      <!-- 12. Dynamic Custom Sections -->
+      ${customSections.map((sec, secIdx) => `
+        <section class="res-section cv-filter-target" data-filter="all" data-custom-idx="${secIdx}">
+          <div class="res-job-head">
+            <h3 class="res-section-title editable-text" contenteditable="${this.isCvEditMode}" style="margin-bottom: 0;">${sec.title}</h3>
+            <div class="section-ctrl-bar ${this.isCvEditMode ? '' : 'hidden'}">
+              <button class="micro-btn add-bullet-btn" onclick="window.gameEngine.addCustomSectionBullet(${secIdx})">➕ Add Bullet</button>
+              <button class="micro-btn del-btn" onclick="window.gameEngine.deleteCustomSection(${secIdx})">🗑️ Delete Section</button>
+            </div>
+          </div>
+          <ul class="res-bullets">
+            ${sec.items.map((it, itIdx) => `
+              <li>
+                <span class="editable-text" contenteditable="${this.isCvEditMode}">${it}</span>
+                <span class="edit-micro-controls ${this.isCvEditMode ? '' : 'hidden'}">
+                  <button class="micro-btn del-btn" onclick="window.gameEngine.deleteCvBullet(this)">🗑️</button>
+                </span>
+              </li>
+            `).join('')}
+          </ul>
+        </section>
+      `).join('')}
     `;
+
+    // Hook auto-save debounce listener on doc
+    if (!this.hasAutoSaveBound) {
+      this.hasAutoSaveBound = true;
+      doc.addEventListener('input', () => {
+        clearTimeout(this.autoSaveTimer);
+        this.autoSaveTimer = setTimeout(() => this.autoSaveCvEdits(), 400);
+      });
+    }
+
+    // Re-apply filter
+    if (this.activeCvFilter && this.activeCvFilter !== 'all') {
+      this.applyCvFilter(this.activeCvFilter);
+    }
+  }
+
+  // ===========================================================================
+  // BOSS MODE STUDIO INTERACTIVE METHODS
+  // ===========================================================================
+  bindBossStudioEvents() {
+    const btnToggle = document.getElementById('btn-toggle-edit-mode');
+    const btnAddSec = document.getElementById('btn-add-custom-section');
+    const btnReset = document.getElementById('btn-reset-cv-defaults');
+    const btnAdminPin = document.getElementById('btn-admin-export-pin');
+    const btnCopy = document.getElementById('btn-copy-ats');
+    const btnPrint = document.getElementById('btn-print-cv');
+    const btnBack = document.getElementById('btn-resume-back');
+
+    if (btnToggle) btnToggle.onclick = () => this.toggleCvEditMode();
+    if (btnAddSec) btnAddSec.onclick = () => this.addCustomCvSection();
+    if (btnReset) btnReset.onclick = () => this.resetCvDefaults();
+    if (btnAdminPin) btnAdminPin.onclick = () => this.adminExportJsonWithPin();
+    if (btnCopy) btnCopy.onclick = () => this.copyPlainTextATS();
+    if (btnPrint) btnPrint.onclick = () => window.print();
+    if (btnBack) btnBack.onclick = () => this.closeBossResume();
+
+    // Recruiter Filter Buttons
+    document.querySelectorAll('.cv-filter-btn').forEach(btn => {
+      btn.onclick = () => this.applyCvFilter(btn.dataset.filter);
+    });
+
+    // Theme Preset Buttons
+    document.querySelectorAll('.cv-theme-btn').forEach(btn => {
+      btn.onclick = () => this.applyCvTheme(btn.dataset.theme);
+    });
+  }
+
+  toggleCvEditMode() {
+    this.isCvEditMode = !this.isCvEditMode;
+    const btn = document.getElementById('btn-toggle-edit-mode');
+    const txt = document.getElementById('edit-toggle-text');
+    const doc = document.getElementById('boss-printable-document');
+
+    if (btn && txt) {
+      if (this.isCvEditMode) {
+        btn.classList.add('studio-edit-active-btn');
+        txt.textContent = 'Live Edit Mode: ON';
+        audio.playFanfare();
+      } else {
+        btn.classList.remove('studio-edit-active-btn');
+        txt.textContent = 'Live Edit Mode: OFF';
+        audio.playTone(480, 'sine', 0.1, 0.1);
+      }
+    }
+
+    // Toggle edit-only buttons in toolbar
+    document.querySelectorAll('.edit-ctrl-btn').forEach(b => {
+      b.classList.toggle('hidden', !this.isCvEditMode);
+    });
+
+    // Re-render CV with updated contenteditable flags
+    this.renderBossResume();
+  }
+
+  applyCvFilter(filterName) {
+    this.activeCvFilter = filterName;
+
+    // Update filter buttons UI
+    document.querySelectorAll('.cv-filter-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.filter === filterName);
+    });
+
+    // Filter targets
+    document.querySelectorAll('.cv-filter-target').forEach(el => {
+      const filters = (el.dataset.filter || '').split(' ');
+      if (filterName === 'all') {
+        el.classList.remove('filter-dimmed', 'filter-highlight');
+      } else if (filters.includes(filterName)) {
+        el.classList.add('filter-highlight');
+        el.classList.remove('filter-dimmed');
+      } else {
+        el.classList.add('filter-dimmed');
+        el.classList.remove('filter-highlight');
+      }
+    });
+
+    audio.playTone(filterName === 'all' ? 520 : 680, 'triangle', 0.08, 0.15);
+  }
+
+  applyCvTheme(themeName) {
+    this.activeCvTheme = themeName;
+    const doc = document.getElementById('boss-printable-document');
+    if (doc) {
+      doc.className = `printable-paper theme-${themeName} ${this.isCvEditMode ? 'cv-edit-active' : ''}`;
+    }
+
+    document.querySelectorAll('.cv-theme-btn').forEach(b => {
+      b.classList.toggle('active', b.dataset.theme === themeName);
+    });
+
+    audio.playTone(620, 'sine', 0.1, 0.15);
+  }
+
+  autoSaveCvEdits() {
+    try {
+      // Sync edits to localStorage
+      localStorage.setItem('rajdeep_boss_cv_custom', JSON.stringify(window.CAREER_DATA));
+    } catch (e) {
+      console.warn("Could not save to localStorage", e);
+    }
+  }
+
+  adminExportJsonWithPin() {
+    const pin = window.prompt("🔒 ONGC CPF Administrator Verification\nPlease enter your 6-digit CPF PIN to export canonical career-data.json:");
+    if (pin === "141604") {
+      audio.playFanfare();
+      const jsonStr = JSON.stringify(window.CAREER_DATA, null, 2);
+      const blob = new Blob([jsonStr], { type: 'application/json' });
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url;
+      a.download = 'career-data.json';
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      URL.revokeObjectURL(url);
+      alert("✅ CPF 141604 VERIFIED!\nUpdated career-data.json has been exported successfully to your downloads.");
+    } else if (pin !== null) {
+      audio.playHit();
+      alert("❌ ACCESS DENIED: Invalid CPF Administrator PIN.");
+    }
+  }
+
+  resetCvDefaults() {
+    if (confirm("Reset Boss CV Studio to original canonical data? Any unsaved live edits will be reverted.")) {
+      try {
+        localStorage.removeItem('rajdeep_boss_cv_custom');
+      } catch (e) {}
+      window.CAREER_DATA = JSON.parse(JSON.stringify(DEFAULT_CAREER_DATA));
+      this.renderBossResume();
+      audio.playFanfare();
+      alert("🔄 Boss Mode CV restored to canonical default profile!");
+    }
+  }
+
+  addTallyRow() {
+    if (!window.CAREER_DATA.operationsTally) window.CAREER_DATA.operationsTally = [];
+    window.CAREER_DATA.operationsTally.push({
+      basin: "New Frontier Basin",
+      block: "Exploration Block",
+      role: "Geologist",
+      method: "Seismic / Wellsite",
+      impact: "Operational milestone achieved"
+    });
+    this.renderBossResume();
+    this.autoSaveCvEdits();
+  }
+
+  deleteTallyRow(btn) {
+    const tr = btn.closest('tr');
+    if (tr && tr.dataset.idx !== undefined) {
+      const idx = parseInt(tr.dataset.idx, 10);
+      window.CAREER_DATA.operationsTally.splice(idx, 1);
+      this.renderBossResume();
+      this.autoSaveCvEdits();
+    }
+  }
+
+  reorderTallyRow(btn, dir) {
+    const tr = btn.closest('tr');
+    if (!tr || tr.dataset.idx === undefined) return;
+    const idx = parseInt(tr.dataset.idx, 10);
+    const targetIdx = idx + dir;
+    const list = window.CAREER_DATA.operationsTally;
+    if (targetIdx >= 0 && targetIdx < list.length) {
+      const temp = list[idx];
+      list[idx] = list[targetIdx];
+      list[targetIdx] = temp;
+      this.renderBossResume();
+      this.autoSaveCvEdits();
+    }
+  }
+
+  addTechnicalReport() {
+    if (!window.CAREER_DATA.technicalReports) window.CAREER_DATA.technicalReports = [];
+    window.CAREER_DATA.technicalReports.push("New Geological Synthesis & Exploration Technical Report (ONGC, 2025)");
+    this.renderBossResume();
+    this.autoSaveCvEdits();
+  }
+
+  addTrainingItem() {
+    if (!window.CAREER_DATA.specializedTraining) window.CAREER_DATA.specializedTraining = [];
+    window.CAREER_DATA.specializedTraining.push("Specialized Advanced Geosciences & Rig Operations Workshop (2025)");
+    this.renderBossResume();
+    this.autoSaveCvEdits();
+  }
+
+  addRoleBullet(roleIdx) {
+    if (window.CAREER_DATA.roles && window.CAREER_DATA.roles[roleIdx]) {
+      window.CAREER_DATA.roles[roleIdx].highlights.push("New operational milestone and frontline achievement logged.");
+      this.renderBossResume();
+      this.autoSaveCvEdits();
+    }
+  }
+
+  deleteCvBullet(btn) {
+    const li = btn.closest('li');
+    if (!li) return;
+    const ul = li.closest('ul');
+    li.remove();
+    this.autoSaveCvEdits();
+  }
+
+  reorderCvBullet(btn, dir) {
+    const li = btn.closest('li');
+    if (!li) return;
+    if (dir === -1 && li.previousElementSibling) {
+      li.parentNode.insertBefore(li, li.previousElementSibling);
+    } else if (dir === 1 && li.nextElementSibling) {
+      li.parentNode.insertBefore(li.nextElementSibling, li);
+    }
+    this.autoSaveCvEdits();
+  }
+
+  addCustomCvSection() {
+    const title = window.prompt("Enter title for new Custom CV Section (e.g., 'Publications & Patents', 'Languages'):");
+    if (!title || !title.trim()) return;
+    if (!window.CAREER_DATA.customSections) window.CAREER_DATA.customSections = [];
+    window.CAREER_DATA.customSections.push({
+      title: title.trim(),
+      items: ["First key achievement, publication citation, or credential..."]
+    });
+    this.renderBossResume();
+    this.autoSaveCvEdits();
+    audio.playFanfare();
+  }
+
+  addCustomSectionBullet(secIdx) {
+    if (window.CAREER_DATA.customSections && window.CAREER_DATA.customSections[secIdx]) {
+      window.CAREER_DATA.customSections[secIdx].items.push("Additional operational bullet point or publication citation.");
+      this.renderBossResume();
+      this.autoSaveCvEdits();
+    }
+  }
+
+  deleteCustomSection(secIdx) {
+    if (confirm("Delete this entire custom section?")) {
+      window.CAREER_DATA.customSections.splice(secIdx, 1);
+      this.renderBossResume();
+      this.autoSaveCvEdits();
+    }
+  }
+
+  // ===========================================================================
+  // INDUSTRY EASTER EGGS
+  // ===========================================================================
+  bindEasterEggEvents() {
+    // 1. Petrel 4:59 PM Crash Triggers
+    const btnFreeze = document.getElementById('btn-trigger-petrel-freeze');
+    if (btnFreeze) btnFreeze.onclick = () => this.triggerPetrelCrash();
+
+    const btnRescue = document.getElementById('btn-rescue-petrel');
+    if (btnRescue) btnRescue.onclick = () => this.rescuePetrelProject();
+
+    const btnDismissPetrel = document.getElementById('btn-dismiss-petrel');
+    if (btnDismissPetrel) {
+      btnDismissPetrel.onclick = () => {
+        document.getElementById('modal-petrel-crash').classList.add('hidden');
+        audio.playHit();
+      };
+    }
+
+    // 2. 3 AM Masala Chai Mystery Triggers
+    const btnChai = document.getElementById('btn-trigger-masala-chai');
+    if (btnChai) btnChai.onclick = () => this.triggerMasalaChaiMystery();
+
+    const btnInspectChai = document.getElementById('btn-inspect-chai');
+    if (btnInspectChai) btnInspectChai.onclick = () => this.inspectMasalaChaiSensor();
+
+    const btnCloseChai = document.getElementById('btn-close-chai');
+    if (btnCloseChai) {
+      btnCloseChai.onclick = () => {
+        document.getElementById('modal-masala-chai').classList.add('hidden');
+      };
+    }
+  }
+
+  triggerPetrelCrash() {
+    this.closeAllModals();
+    const modal = document.getElementById('modal-petrel-crash');
+    const res = document.getElementById('petrel-rescue-result');
+    if (res) res.classList.add('hidden');
+    if (modal) {
+      modal.classList.remove('hidden');
+      audio.playTone(320, 'sawtooth', 0.4, 0.3);
+    }
+  }
+
+  rescuePetrelProject() {
+    const res = document.getElementById('petrel-rescue-result');
+    if (res) {
+      res.classList.remove('hidden');
+      res.className = 'minigame-result-msg result-success';
+      res.innerHTML = `💾 RESCUE SUCCESSFUL! [Ctrl+S] saved 3 seismic cubes &amp; 14 BExB prospect faults at 4:59:59 PM! (+50 XP Subsurface Savior)`;
+    }
+    this.addXP(50);
+    this.setExpression('wicked_smirk', true);
+    audio.playFanfare();
+    setTimeout(() => {
+      document.getElementById('modal-petrel-crash').classList.add('hidden');
+    }, 2400);
+  }
+
+  triggerMasalaChaiMystery() {
+    this.closeAllModals();
+    const modal = document.getElementById('modal-masala-chai');
+    const res = document.getElementById('chai-investigation-result');
+    if (res) res.classList.add('hidden');
+    if (modal) {
+      modal.classList.remove('hidden');
+      audio.playTone(840, 'sawtooth', 0.3, 0.25);
+    }
+  }
+
+  inspectMasalaChaiSensor() {
+    const res = document.getElementById('chai-investigation-result');
+    if (res) res.classList.remove('hidden');
+    this.addXP(50);
+    this.setExpression('loupe_cyclops', true);
+    audio.playFanfare();
+  }
+
+  activateChiefExplorerGodMode() {
+    this.player.isGodMode = true;
+    this.setExpression('deal_with_it', true);
+    audio.playFanfare();
+    this.player.showBubble("🌟 CHIEF EXPLORER GOD MODE! 2.5x SPEED! [H] EXPLODES GEMS!", 3.2);
+    this.spawnGodModeExplosion(this.player.x, this.player.y);
+  }
+
+  spawnGodModeExplosion(x, y) {
+    const colors = ['#FACC15', '#67E8F9', '#A855F7', '#EF4444', '#10B981', '#0F172A'];
+    for (let i = 0; i < 36; i++) {
+      const angle = (i / 36) * Math.PI * 2;
+      const speed = 40 + Math.random() * 80;
+      this.particles.push({
+        x: x,
+        y: y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        life: 1.2,
+        color: colors[Math.floor(Math.random() * colors.length)]
+      });
+    }
+  }
+
+  printDevToolsAsciiArt() {
+    console.log(
+      "%c" +
+      "       /\\\n" +
+      "      /  \\       ===============================================================\n" +
+      "     / /\\ \\      GEOLOGY QUEST: BASIN TO BIT — 16-BIT RETRO RPG PORTFOLIO\n" +
+      "    / /__\\ \\     Player: Rajdeep Tarafder (Wellsite & Exploration Geologist | ONGC)\n" +
+      "   |   ||   |    CPF: 141604 | Email: tarafderrajdeep@gmail.com | +91 90075 15735\n" +
+      "   |   ||   |    LinkedIn: https://linkedin.com/in/rajdeep-tarafder-82a408184\n" +
+      "   |   ||   |    ===============================================================\n" +
+      "  /==========\\   Core Arsenal: Petrel, PaleoScan, 3D MEM, Post Drill Analysis,\n" +
+      " / /|      |\\ \\  Wellsite Surveillance, Natural H2 & He, Supervised ML (EPMA)\n" +
+      "/_/ |______|_\\_\\ Recruiting or collaborating? Transmit via in-game Rig Radio [📻]!\n",
+      "color: #F59E0B; font-weight: bold; font-family: monospace; font-size: 11px;"
+    );
   }
 
   loop(timestamp) {
