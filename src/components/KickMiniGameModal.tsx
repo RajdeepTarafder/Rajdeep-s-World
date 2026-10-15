@@ -5,17 +5,20 @@ interface KickMiniGameModalProps {
   isOpen: boolean;
   onClose: () => void;
   onRewardXP: (xp: number) => void;
+  onTriggerExpression?: (exprId: string) => void;
 }
 
 export const KickMiniGameModal: React.FC<KickMiniGameModalProps> = ({
   isOpen,
   onClose,
-  onRewardXP
+  onRewardXP,
+  onTriggerExpression
 }) => {
   const [needlePos, setNeedlePos] = useState(20);
   const [safeTimer, setSafeTimer] = useState(0);
   const [won, setWon] = useState(false);
   const [active, setActive] = useState(false);
+  const [chaiGagState, setChaiGagState] = useState<'idle' | 'spiking' | 'inspected'>('idle');
 
   const stateRef = useRef({
     active: false,
@@ -143,6 +146,39 @@ export const KickMiniGameModal: React.FC<KickMiniGameModalProps> = ({
           </div>
         )}
 
+        {/* Easter Egg: Rig Floor False Gas Peak vs. 3 AM Masala Chai */}
+        {chaiGagState === 'spiking' && (
+          <div className="chai-box" style={{ background: '#78350F', border: '3px solid #F59E0B', padding: '12px', margin: '12px 0', animation: 'pulse 0.9s infinite' }}>
+            <p style={{ color: '#FEF3C7', fontWeight: 'bold', fontSize: '11px', marginBottom: '6px' }}>
+              🚨 ALARM: TOTAL GAS SURGED TO 85% C1 METHANE AT 3:15 AM!
+            </p>
+            <p style={{ color: '#FDE68A', fontSize: '9px', marginBottom: '8px' }}>
+              Chromatograph anomaly detected near doghouse gas sampling line!
+            </p>
+            <button
+              onClick={() => {
+                setChaiGagState('inspected');
+                audio.playFanfare();
+                onRewardXP(50);
+                if (onTriggerExpression) onTriggerExpression('loupe_cyclops');
+              }}
+              className="nes-btn is-warning"
+              style={{ fontSize: '9px', padding: '6px 14px' }}
+            >
+              🔍 Inspect Sensor with 10x Loupe [M]
+            </button>
+          </div>
+        )}
+
+        {chaiGagState === 'inspected' && (
+          <div className="minigame-result-msg result-success" style={{ background: '#065F46', border: '2px solid #34D399', margin: '10px 0' }}>
+            ☕ &ldquo;False alarm Driller — just recycled trip-gas and a fresh kettle of 3 AM rig masala chai! Drilling ahead safely!&rdquo; (+50 XP)
+            <div style={{ fontSize: '9px', marginTop: '4px', color: '#A7F3D0' }}>
+              🎭 10x Loupe Cyclops expression activated!
+            </div>
+          </div>
+        )}
+
         <div style={{ textAlign: 'center', margin: '12px 0' }}>
           <button
             onClick={pumpMud}
@@ -154,8 +190,20 @@ export const KickMiniGameModal: React.FC<KickMiniGameModalProps> = ({
           </button>
         </div>
 
-        <div className="modal-footer-bar">
-          <button onClick={onClose} className="nes-btn is-error">
+        <div className="modal-footer-bar" style={{ display: 'flex', justifyContent: 'space-between', gap: '8px', flexWrap: 'wrap' }}>
+          {chaiGagState === 'idle' && (
+            <button
+              onClick={() => {
+                setChaiGagState('spiking');
+                audio.playAlarmSiren();
+              }}
+              className="nes-btn is-warning"
+              style={{ fontSize: '8px', padding: '4px 10px' }}
+            >
+              🚨 Check Mystery Gas Spike
+            </button>
+          )}
+          <button onClick={onClose} className="nes-btn is-error" style={{ fontSize: '9px', padding: '4px 10px' }}>
             Exit Well Control Console
           </button>
         </div>

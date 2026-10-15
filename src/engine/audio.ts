@@ -134,6 +134,33 @@ export class RetroSynth {
     }
   }
 
+  public playExpressionChirp(freq: number = 740, type: OscillatorType = 'sawtooth', duration: number = 0.15) {
+    this.playTone(freq, type, duration, 0.2);
+  }
+
+  public playAlarmSiren() {
+    if (this.isMuted || !this.ctx) return;
+    this.ensure();
+    const sirenNotes = [880, 580, 880, 580, 880, 580];
+    sirenNotes.forEach((f, idx) => {
+      setTimeout(() => this.playTone(f, 'sawtooth', 0.18, 0.25), idx * 180);
+    });
+  }
+
+  public playGlitchBuzz() {
+    this.playTone(140, 'sawtooth', 0.2, 0.3);
+    setTimeout(() => this.playTone(90, 'square', 0.25, 0.25), 80);
+  }
+
+  public playGodModeChime() {
+    if (this.isMuted || !this.ctx) return;
+    this.ensure();
+    const chord = [523.25, 659.25, 783.99, 1046.50, 1318.51, 1567.98];
+    chord.forEach((f, i) => {
+      setTimeout(() => this.playTone(f, 'sine', 0.35, 0.15), i * 60);
+    });
+  }
+
   public startBGM() {
     if (this.bgmPlaying || this.isMuted || !this.ctx) return;
     this.bgmPlaying = true;

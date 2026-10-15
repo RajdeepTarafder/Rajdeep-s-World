@@ -1,9 +1,84 @@
+import { PortraitExpression, PortraitExpressionId } from '../types/game';
+
 // Procedural 16-bit Retro Pixel Art Generator
 // Zero external image dependencies - all generated via crisp canvas pixel buffers
 
 export const TILE_SIZE = 32;
 export const MAP_COLS = 60;
 export const MAP_ROWS = 22;
+
+export const PORTRAIT_EXPRESSIONS: PortraitExpression[] = [
+  {
+    id: 'wicked_smirk',
+    name: 'WICKED DISCOVERY SMIRK',
+    quote: 'Subsurface decoded. Target depth locked — Drill here!',
+    triggerText: 'Petrel BExB/EPMB Prospects & Pay Zones',
+    sound: { freq: 740, type: 'sawtooth', duration: 0.15 }
+  },
+  {
+    id: 'caffeine_overdrive',
+    name: 'CAFFEINE OVERDRIVE MANIAC',
+    quote: '48 HOURS AWAKE! THE CORE LOG IS NEVER WRONG!',
+    triggerText: 'Rig Coffee Urn & 24-Hr Shift Dodge',
+    sound: { freq: 980, type: 'square', duration: 0.2 }
+  },
+  {
+    id: 'loupe_cyclops',
+    name: '10x LOUPE CYCLOPS',
+    quote: 'Euhedral pyrope! 100% Cr-diopside intergrowth spotted!',
+    triggerText: 'Outcrop / Cuttings 10x Inspection [M]',
+    sound: { freq: 620, type: 'triangle', duration: 0.18 }
+  },
+  {
+    id: 'blowout_sweat',
+    name: 'PDA BLOWOUT SWEAT',
+    quote: 'Kill sheet calculated! Mud weight 1.35 SG — pump now!',
+    triggerText: 'Rig Doghouse / Kill-the-Kick Cement Squeeze',
+    sound: { freq: 440, type: 'sawtooth', duration: 0.25 }
+  },
+  {
+    id: 'helium_chipmunk',
+    name: 'HELIUM CHIPMUNK',
+    quote: 'Squeak! Pure mantle helium-4 and natural hydrogen flow!',
+    triggerText: 'H2 & He Unconventional Gas Cylinders',
+    sound: { freq: 1150, type: 'sine', duration: 0.2 }
+  },
+  {
+    id: 'matrix_hacker',
+    name: 'MATRIX SEISMIC HACKER',
+    quote: "I don't see seismic traces anymore. I see basin faults.",
+    triggerText: 'AI/SAR Hologram & Python ML Terminal',
+    sound: { freq: 520, type: 'square', duration: 0.18 }
+  },
+  {
+    id: 'centre_back',
+    name: 'CENTRE-BACK WARRIOR',
+    quote: 'No striker passes this defensive line! Clean sheet guaranteed!',
+    triggerText: 'Football Pitch [F] Slide Tackle & Gym Barbell',
+    sound: { freq: 380, type: 'triangle', duration: 0.2 }
+  },
+  {
+    id: 'kimberlite_eureka',
+    name: 'KIMBERLITE DIAMOND EUREKA',
+    quote: 'G10 sub-calcic pyrope vector detected! We hit the pipe!',
+    triggerText: 'IIT ISM EPMA ML Classifier & Core Vault',
+    sound: { freq: 880, type: 'sine', duration: 0.22 }
+  },
+  {
+    id: 'shift_zombie',
+    name: '13th-DAY SHIFT ZOMBIE',
+    quote: 'What day is it... did the night shift geologist arrive yet...?',
+    triggerText: 'Player Idle > 6s & 24-Hr Shift Rotations',
+    sound: { freq: 260, type: 'sine', duration: 0.3 }
+  },
+  {
+    id: 'deal_with_it',
+    name: 'DEAL-WITH-IT BOSS',
+    quote: 'Basin cleared. Reserves certified. Deal with it.',
+    triggerText: '100% XP, God Mode & Boss Mode CV',
+    sound: { freq: 830, type: 'square', duration: 0.25 }
+  }
+];
 
 export function createBuffer(w: number, h: number): { canvas: HTMLCanvasElement; ctx: CanvasRenderingContext2D } {
   const canvas = document.createElement('canvas');
@@ -1133,47 +1208,412 @@ export class SpriteStore {
   }
 
   public buildPortraits() {
-    ['academic', 'lab', 'rig'].forEach(outfit => {
-      const { canvas, ctx } = createBuffer(80, 80);
-      ctx.fillStyle = '#0F172A';
-      ctx.fillRect(0, 0, 80, 80);
-      ctx.fillStyle = '#1E293B';
-      ctx.fillRect(2, 2, 76, 76);
-
-      const shirt = outfit === 'rig' ? '#EA580C' : outfit === 'lab' ? '#334155' : '#1E3A8A';
-      ctx.fillStyle = shirt;
-      ctx.fillRect(16, 54, 48, 22);
-
-      if (outfit === 'rig') {
-        ctx.fillStyle = '#E2E8F0';
-        ctx.fillRect(16, 62, 48, 4);
-      }
-
-      ctx.fillStyle = '#F5D0A9';
-      ctx.fillRect(24, 20, 32, 34);
-
-      if (outfit === 'rig') {
-        ctx.fillStyle = '#FACC15';
-        ctx.fillRect(18, 8, 44, 16);
-        ctx.fillRect(16, 22, 48, 5);
-      } else {
-        ctx.fillStyle = '#1C1917';
-        ctx.fillRect(22, 10, 36, 12);
-      }
-
-      if (outfit === 'lab') {
-        ctx.strokeStyle = '#38BDF8';
-        ctx.lineWidth = 2;
-        ctx.strokeRect(26, 30, 10, 8);
-        ctx.strokeRect(44, 30, 10, 8);
-      }
-
-      ctx.fillStyle = '#1C1917';
-      ctx.fillRect(30, 33, 3, 3);
-      ctx.fillRect(47, 33, 3, 3);
-
-      this.cache[`portrait_${outfit}`] = canvas;
+    PORTRAIT_EXPRESSIONS.forEach(expr => {
+      ['academic', 'lab', 'rig'].forEach(outfit => {
+        const { canvas, ctx } = createBuffer(80, 80);
+        this.drawExpressionPortrait(ctx, expr.id, outfit);
+        this.cache[`portrait_${expr.id}_${outfit}`] = canvas;
+      });
+      // Default to rig outfit for quick lookup
+      this.cache[`portrait_${expr.id}`] = this.cache[`portrait_${expr.id}_rig`];
     });
+
+    // Retain legacy keys defaulting to wicked smirk
+    ['academic', 'lab', 'rig'].forEach(outfit => {
+      this.cache[`portrait_${outfit}`] = this.cache[`portrait_wicked_smirk_${outfit}`];
+    });
+  }
+
+  public drawExpressionPortrait(ctx: CanvasRenderingContext2D, exprId: string, outfit: string) {
+    // 1. Frame & Slate Background
+    ctx.fillStyle = '#0F172A';
+    ctx.fillRect(0, 0, 80, 80);
+    ctx.fillStyle = '#1E293B';
+    ctx.fillRect(2, 2, 76, 76);
+
+    // 2. Torso / Shoulders based on outfit
+    const shirt = outfit === 'rig' ? '#EA580C' : outfit === 'lab' ? '#334155' : '#1E3A8A';
+    const skin = exprId === 'shift_zombie' ? '#D1D5DB' : '#F5D0A9';
+
+    ctx.fillStyle = shirt;
+    ctx.fillRect(16, 54, 48, 22);
+
+    if (outfit === 'rig') {
+      // Hi-vis reflective silver stripe
+      ctx.fillStyle = '#E2E8F0';
+      ctx.fillRect(16, 62, 48, 4);
+    } else if (outfit === 'lab') {
+      // Lab ID Badge lanyard
+      ctx.strokeStyle = '#38BDF8';
+      ctx.lineWidth = 1;
+      ctx.strokeRect(36, 58, 8, 12);
+    }
+
+    // 3. Neck & Base Face
+    ctx.fillStyle = skin;
+    ctx.fillRect(32, 46, 16, 10); // Neck
+    ctx.fillRect(22, 18, 36, 32); // Face box
+    ctx.fillRect(18, 26, 4, 8);   // Left ear
+    ctx.fillRect(58, 26, 4, 8);   // Right ear
+
+    // 4. Base Hair / Hard Hat
+    if (outfit === 'rig') {
+      const hatY = exprId === 'blowout_sweat' ? 6 : 10;
+      ctx.fillStyle = '#FACC15';
+      ctx.fillRect(18, hatY, 44, 14); // helmet dome
+      ctx.fillRect(14, hatY + 12, 52, 4); // helmet brim
+      // ONGC red dot
+      ctx.fillStyle = '#B91C1C';
+      ctx.fillRect(38, hatY + 4, 4, 4);
+    } else {
+      ctx.fillStyle = '#1C1917';
+      ctx.fillRect(20, 10, 40, 12); // hair top
+      ctx.fillRect(18, 18, 6, 8);   // sideburn left
+      ctx.fillRect(56, 18, 6, 8);   // sideburn right
+    }
+
+    // 5. 10 SPECIFIC FACIAL EXPRESSIONS
+    switch (exprId) {
+      case 'wicked_smirk': {
+        // Asymmetric wicked eyebrows
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(24, 25, 10, 2); // left brow angled high
+        ctx.fillRect(46, 29, 10, 2); // right brow lowered
+        // Narrowed confident eyes
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(26, 30, 8, 3);
+        ctx.fillRect(46, 31, 8, 3);
+        // Glasses with diagonal anime glint
+        ctx.strokeStyle = '#38BDF8';
+        ctx.lineWidth = 1.5;
+        ctx.strokeRect(24, 28, 12, 8);
+        ctx.strokeRect(44, 28, 12, 8);
+        ctx.beginPath();
+        ctx.moveTo(36, 32); ctx.lineTo(44, 32);
+        ctx.stroke();
+        // Anime glint slash across left lens
+        ctx.strokeStyle = '#FFFFFF';
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+        ctx.moveTo(25, 34); ctx.lineTo(34, 28);
+        ctx.stroke();
+        // Sparkle star at glint tip
+        ctx.fillStyle = '#FEF08A';
+        ctx.fillRect(34, 27, 2, 2);
+        ctx.fillRect(33, 26, 4, 1);
+        ctx.fillRect(34, 25, 1, 4);
+        // Wicked smirk mouth (curves high right)
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(32, 42, 14, 3);
+        ctx.fillRect(44, 40, 4, 3);
+        // Sharp canine glint
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(42, 42, 3, 2);
+        break;
+      }
+
+      case 'caffeine_overdrive': {
+        // High vibrating eyebrows
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(22, 22, 12, 2);
+        ctx.fillRect(46, 22, 12, 2);
+        // Giant wide bloodshot eyes
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(24, 25, 12, 9);
+        ctx.fillRect(44, 25, 12, 9);
+        // Red veins
+        ctx.fillStyle = '#EF4444';
+        ctx.fillRect(24, 26, 3, 1);
+        ctx.fillRect(33, 31, 3, 1);
+        ctx.fillRect(44, 31, 3, 1);
+        ctx.fillRect(53, 26, 3, 1);
+        // Tiny pinpoint dilated pupils
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(29, 28, 3, 3);
+        ctx.fillRect(49, 28, 3, 3);
+        // Wide open hyper grin with jagged zigzag teeth
+        ctx.fillStyle = '#7F1D1D';
+        ctx.fillRect(28, 38, 24, 8);
+        ctx.fillStyle = '#FFFFFF';
+        for (let i = 0; i < 6; i++) {
+          ctx.fillRect(28 + i * 4, 38, 2, 3); // top teeth
+          ctx.fillRect(30 + i * 4, 43, 2, 3); // bottom teeth
+        }
+        // Rising steam puffs above head
+        ctx.fillStyle = '#CBD5E1';
+        ctx.fillRect(22, 4, 3, 3);
+        ctx.fillRect(26, 2, 3, 3);
+        ctx.fillRect(50, 4, 3, 3);
+        ctx.fillRect(54, 2, 3, 3);
+        break;
+      }
+
+      case 'loupe_cyclops': {
+        // Right eye squinted shut in focus
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(46, 26, 10, 2); // brow
+        ctx.fillRect(46, 30, 8, 2);  // squint line
+        ctx.fillRect(52, 32, 3, 2);
+        // LEFT EYE: GIANT 10x PETROLOGICAL LOUPE
+        // Brass metallic rim
+        ctx.fillStyle = '#D97706';
+        ctx.beginPath();
+        ctx.arc(30, 31, 13, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#F59E0B';
+        ctx.beginPath();
+        ctx.arc(30, 31, 11, 0, Math.PI * 2);
+        ctx.fill();
+        // Cyan-tinted magnified lens glass
+        ctx.fillStyle = '#E0F2FE';
+        ctx.beginPath();
+        ctx.arc(30, 31, 9, 0, Math.PI * 2);
+        ctx.fill();
+        // Magnified gigantic iris & pupil
+        ctx.fillStyle = '#451A03';
+        ctx.beginPath();
+        ctx.arc(30, 31, 6, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.fillStyle = '#000000';
+        ctx.beginPath();
+        ctx.arc(30, 31, 3.5, 0, Math.PI * 2);
+        ctx.fill();
+        // Reflection highlight
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(28, 28, 3, 3);
+        // Metal hinge handle
+        ctx.fillStyle = '#B45309';
+        ctx.fillRect(18, 39, 6, 4);
+        ctx.fillRect(14, 42, 6, 4);
+        // Concentrated mouth with tongue sticking out
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(36, 42, 10, 2);
+        ctx.fillStyle = '#F43F5E';
+        ctx.fillRect(44, 42, 5, 5); // pink tongue
+        break;
+      }
+
+      case 'blowout_sweat': {
+        // Tilted vibrating hard hat motion lines
+        ctx.fillStyle = '#38BDF8';
+        ctx.fillRect(16, 2, 4, 2);
+        ctx.fillRect(60, 2, 4, 2);
+        // Worried high wavy eyebrows
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(24, 24, 10, 2);
+        ctx.fillRect(46, 24, 10, 2);
+        // Wide panicked eyes looking at telemetry
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(24, 28, 10, 7);
+        ctx.fillRect(46, 28, 10, 7);
+        ctx.fillStyle = '#0F172A';
+        ctx.fillRect(28, 31, 4, 4);
+        ctx.fillRect(50, 31, 4, 4);
+        // Flying blue comic sweat droplets
+        ctx.fillStyle = '#38BDF8';
+        ctx.fillRect(15, 20, 3, 5); // left splash
+        ctx.fillRect(12, 23, 2, 3);
+        ctx.fillRect(62, 20, 3, 5); // right splash
+        ctx.fillRect(65, 23, 2, 3);
+        // Gritted clenched teeth mouth
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(28, 40, 24, 7);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(29, 41, 22, 5);
+        ctx.fillStyle = '#1C1917';
+        for (let t = 0; t < 5; t++) {
+          ctx.fillRect(32 + t * 4, 41, 1, 5); // vertical teeth slits
+        }
+        break;
+      }
+
+      case 'helium_chipmunk': {
+        // Giant round puffed cheeks bulging out
+        ctx.fillStyle = '#FDA4AF';
+        ctx.beginPath();
+        ctx.arc(22, 36, 8, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.arc(58, 36, 8, 0, Math.PI * 2);
+        ctx.fill();
+        // Starry 4-point yellow sparkle eyes
+        const drawStarEye = (cx: number, cy: number) => {
+          ctx.fillStyle = '#FACC15';
+          ctx.fillRect(cx - 1, cy - 5, 3, 11);
+          ctx.fillRect(cx - 5, cy - 1, 11, 3);
+          ctx.fillStyle = '#FFFFFF';
+          ctx.fillRect(cx, cy, 1, 1);
+        };
+        drawStarEye(30, 29);
+        drawStarEye(50, 29);
+        // Tiny 'o' shaped high-pitch whistling mouth
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(38, 41, 5, 5);
+        ctx.fillStyle = '#F43F5E';
+        ctx.fillRect(39, 42, 3, 3);
+        // Floating cyan helium bubbles around head
+        ctx.strokeStyle = '#38BDF8';
+        ctx.lineWidth = 1;
+        ctx.beginPath();
+        ctx.arc(12, 14, 4, 0, Math.PI * 2);
+        ctx.arc(68, 12, 5, 0, Math.PI * 2);
+        ctx.arc(66, 26, 3, 0, Math.PI * 2);
+        ctx.stroke();
+        break;
+      }
+
+      case 'matrix_hacker': {
+        // Dark wrap-around sunglasses
+        ctx.fillStyle = '#020617';
+        ctx.fillRect(22, 26, 36, 12);
+        // Neon green & cyan matrix code & seismic wave on lenses
+        ctx.fillStyle = '#22C55E';
+        ctx.fillRect(25, 28, 2, 3);
+        ctx.fillRect(29, 31, 2, 4);
+        ctx.fillRect(33, 27, 2, 5);
+        ctx.fillStyle = '#06B6D4';
+        ctx.fillRect(45, 28, 2, 5);
+        ctx.fillRect(49, 32, 2, 3);
+        ctx.fillRect(53, 27, 2, 4);
+        // Seismic wave horizon across bottom of glasses
+        ctx.fillStyle = '#4ADE80';
+        ctx.fillRect(24, 35, 4, 1);
+        ctx.fillRect(28, 34, 4, 1);
+        ctx.fillRect(32, 36, 3, 1);
+        ctx.fillRect(45, 34, 4, 1);
+        ctx.fillRect(49, 36, 4, 1);
+        ctx.fillRect(53, 35, 3, 1);
+        // Cool one-sided knowing smirk
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(34, 42, 12, 2);
+        ctx.fillRect(44, 40, 3, 3);
+        // Cyberpunk rim glow on jaw
+        ctx.fillStyle = 'rgba(6, 182, 212, 0.4)';
+        ctx.fillRect(22, 48, 36, 2);
+        break;
+      }
+
+      case 'centre_back': {
+        // Red and white athletic sweatband across forehead
+        ctx.fillStyle = '#DC2626';
+        ctx.fillRect(20, 18, 40, 6);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(20, 20, 40, 2);
+        // Furrowed angry V-shaped thick black eyebrows
+        ctx.fillStyle = '#000000';
+        ctx.beginPath();
+        ctx.moveTo(22, 25); ctx.lineTo(34, 28);
+        ctx.lineTo(34, 30); ctx.lineTo(22, 27);
+        ctx.fill();
+        ctx.beginPath();
+        ctx.moveTo(58, 25); ctx.lineTo(46, 28);
+        ctx.lineTo(46, 30); ctx.lineTo(58, 27);
+        ctx.fill();
+        // Fierce narrowed intense eyes
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(26, 30, 7, 3);
+        ctx.fillRect(47, 30, 7, 3);
+        // Turf dirt battle smudge on left cheek
+        ctx.fillStyle = '#78350F';
+        ctx.fillRect(24, 38, 4, 3);
+        ctx.fillRect(26, 36, 3, 2);
+        // Athletic grit jaw clenched scowl
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(32, 42, 16, 3);
+        ctx.fillRect(31, 44, 3, 2);
+        break;
+      }
+
+      case 'kimberlite_eureka': {
+        // Wide arched surprised eyebrows
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(24, 23, 10, 2);
+        ctx.fillRect(46, 23, 10, 2);
+        // Left Eye: Sparkling Deep Purple G10 Pyrope Garnet Crystal
+        ctx.fillStyle = '#7E22CE';
+        ctx.fillRect(25, 27, 9, 9);
+        ctx.fillStyle = '#C084FC';
+        ctx.fillRect(27, 29, 5, 5);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(28, 28, 2, 2);
+        // Right Eye: Sparkling Cyan/White Diamond Facet
+        ctx.fillStyle = '#0891B2';
+        ctx.fillRect(46, 27, 9, 9);
+        ctx.fillStyle = '#67E8F9';
+        ctx.fillRect(48, 29, 5, 5);
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(49, 28, 2, 2);
+        // Dropped jaw open mouth (O-shaped eureka)
+        ctx.fillStyle = '#0F172A';
+        ctx.fillRect(33, 40, 14, 8);
+        ctx.fillStyle = '#F43F5E';
+        ctx.fillRect(36, 44, 8, 3);
+        // Sparkle stars in top corners
+        ctx.fillStyle = '#FACC15';
+        ctx.fillRect(16, 12, 3, 3);
+        ctx.fillRect(62, 12, 3, 3);
+        break;
+      }
+
+      case 'shift_zombie': {
+        // Heavy dark purple eye bags
+        ctx.fillStyle = '#581C87';
+        ctx.fillRect(22, 32, 14, 5);
+        ctx.fillRect(44, 32, 14, 5);
+        // Drooping half-closed exhausted eyes
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(24, 28, 10, 5);
+        ctx.fillRect(46, 28, 10, 5);
+        // Heavy drooping eyelids covering half of eye
+        ctx.fillStyle = '#D1D5DB';
+        ctx.fillRect(24, 27, 10, 3);
+        ctx.fillRect(46, 27, 10, 3);
+        ctx.fillStyle = '#0F172A';
+        ctx.fillRect(27, 30, 4, 3);
+        ctx.fillRect(49, 30, 4, 3);
+        // Exhausted wavy flat mouth
+        ctx.fillStyle = '#4B5563';
+        ctx.fillRect(32, 42, 6, 2);
+        ctx.fillRect(38, 43, 6, 2);
+        ctx.fillRect(44, 42, 4, 2);
+        // Clenched red coffee mug in bottom-right corner
+        ctx.fillStyle = '#DC2626';
+        ctx.fillRect(54, 56, 12, 14);
+        ctx.fillStyle = '#78350F';
+        ctx.fillRect(56, 54, 8, 3); // dark coffee
+        ctx.fillStyle = '#E2E8F0';
+        ctx.fillRect(66, 60, 4, 6); // handle
+        break;
+      }
+
+      case 'deal_with_it': {
+        // Golden explorer halo / aura on top of head
+        ctx.fillStyle = '#FACC15';
+        ctx.fillRect(24, 4, 32, 2);
+        // Stepped 8-bit black pixel sunglasses
+        ctx.fillStyle = '#000000';
+        ctx.fillRect(20, 27, 16, 9); // left lens
+        ctx.fillRect(44, 27, 16, 9); // right lens
+        ctx.fillRect(36, 29, 8, 3);  // bridge
+        // White pixel highlight on left lens corner
+        ctx.fillStyle = '#FFFFFF';
+        ctx.fillRect(22, 28, 2, 2);
+        ctx.fillRect(46, 28, 2, 2);
+        // Smirk with golden toothpick
+        ctx.fillStyle = '#1C1917';
+        ctx.fillRect(34, 42, 14, 2);
+        ctx.fillRect(46, 40, 3, 3);
+        // Golden toothpick
+        ctx.fillStyle = '#F59E0B';
+        ctx.fillRect(46, 41, 8, 2);
+        // Golden coin sparkle star in top-right
+        ctx.fillStyle = '#FACC15';
+        ctx.fillRect(68, 6, 4, 4);
+        ctx.fillRect(69, 4, 2, 8);
+        ctx.fillRect(66, 7, 8, 2);
+        break;
+      }
+    }
   }
 }
 

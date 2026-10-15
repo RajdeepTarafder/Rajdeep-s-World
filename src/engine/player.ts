@@ -15,6 +15,8 @@ export class PlayerAvatar {
   public x: number;
   public y: number;
   public speed: number = 2.8;
+  public baseSpeed: number = 2.8;
+  public isGodMode: boolean = false;
   public direction: DirectionType = 'down';
   public walkFrame: number = 0;
   public walkTimer: number = 0;
@@ -46,9 +48,11 @@ export class PlayerAvatar {
   // Helium Voice Gag
   public heliumTimer: number = 0;
 
-  // Callback when zone changes
+  // Callbacks
   public onZoneChange?: (zone: { id: 'academic' | 'lab' | 'rig'; name: string; desc: string }) => void;
   public onSoccerKick?: (fromX: number, fromY: number) => void;
+  public onIdleZombie?: () => void;
+  public onHammerGodBurst?: (x: number, y: number) => void;
 
   constructor(x: number, y: number) {
     this.x = x;
@@ -109,12 +113,14 @@ export class PlayerAvatar {
 
     this.isMoving = dx !== 0 || dy !== 0;
 
+    const curSpeed = this.isGodMode ? this.baseSpeed * 2.5 : this.baseSpeed;
+
     if (this.isMoving) {
       this.idleTime = 0;
       this.idleType = 'none';
 
-      const nx = this.x + dx * this.speed;
-      const ny = this.y + dy * this.speed;
+      const nx = this.x + dx * curSpeed;
+      const ny = this.y + dy * curSpeed;
 
       let moved = false;
       if (!map.isSolid(nx - 9, this.y + 12)) {
@@ -150,6 +156,12 @@ export class PlayerAvatar {
     } else {
       this.walkFrame = 0;
       this.idleTime += dt;
+
+      // 13th-Day Shift Zombie trigger at > 6s
+      if (this.idleTime >= 6.0 && this.onIdleZombie) {
+        this.onIdleZombie();
+      }
+
       if (this.idleTime >= 4.0) {
         if (this.idleType === 'none') {
           this.idleType = Math.random() < 0.5 ? 'pushup' : 'coffee';
@@ -201,7 +213,12 @@ export class PlayerAvatar {
     this.actionState = 'hammer';
     this.actionTimer = 0.35;
     audio.playHammer();
-    this.showBubble("*CLANG!* Fresh rock surface cleaved!", 1.8);
+    if (this.isGodMode && this.onHammerGodBurst) {
+      this.onHammerGodBurst(this.x, this.y);
+      this.showBubble("💎 CRACKED THE BASEMENT! DIAMONDS & CRUDE SPRAY!", 2.2);
+    } else {
+      this.showBubble("*CLANG!* Fresh rock surface cleaved!", 1.8);
+    }
   }
 
   public inspectLens() {
@@ -242,6 +259,20 @@ export class PlayerAvatar {
   public render(ctx: CanvasRenderingContext2D, cam: { x: number; y: number }) {
     const sx = Math.round(this.x - cam.x - 16);
     const sy = Math.round(this.y - cam.y - 16);
+
+    // Golden God Mode Aura
+    if (this.isGodMode) {
+      const pulse = 1 + Math.sin(performance.now() * 0.008) * 0.25;
+      ctx.save();
+      ctx.strokeStyle = '#FACC15';
+      ctx.lineWidth = 2.5;
+      ctx.shadowColor = '#F59E0B';
+      ctx.shadowBlur = 12;
+      ctx.beginPath();
+      ctx.arc(this.x - cam.x, this.y - cam.y + 4, 16 * pulse, 0, Math.PI * 2);
+      ctx.stroke();
+      ctx.restore();
+    }
 
     const outfitKey = this.outfit === 'scholar' ? 'academic' : this.outfit;
     let key: string | null = null;

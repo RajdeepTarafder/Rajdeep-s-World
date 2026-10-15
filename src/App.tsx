@@ -2,9 +2,9 @@ import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { GameMap } from './engine/worldMap';
 import { PlayerAvatar } from './engine/player';
 import { audio } from './engine/audio';
-import { TILE_SIZE } from './engine/sprites';
+import { TILE_SIZE, PORTRAIT_EXPRESSIONS } from './engine/sprites';
 import { INITIAL_CAREER_DATA } from './data/careerData';
-import { CareerData, Hotspot, LightingMode, OutfitType, Achievement } from './types/game';
+import { CareerData, Hotspot, LightingMode, OutfitType, Achievement, PortraitExpressionId } from './types/game';
 
 import { HUD } from './components/HUD';
 import { GameCanvas } from './components/GameCanvas';
@@ -13,6 +13,7 @@ import { ZoneBanner } from './components/ZoneBanner';
 import { ActionPrompt } from './components/ActionPrompt';
 import { RigRadioModal } from './components/RigRadioModal';
 import { HotspotModal } from './components/HotspotModal';
+import { BackpackModal } from './components/BackpackModal';
 import { SeismicMiniGameModal } from './components/SeismicMiniGameModal';
 import { KickMiniGameModal } from './components/KickMiniGameModal';
 import { RockRouletteModal } from './components/RockRouletteModal';
@@ -24,12 +25,23 @@ import { LiveUpdaterModal } from './components/LiveUpdaterModal';
 import { BossResumeModal } from './components/BossResumeModal';
 
 export const App: React.FC = () => {
-  const [careerData, setCareerData] = useState<CareerData>(INITIAL_CAREER_DATA);
+  const [careerData, setCareerData] = useState<CareerData>(() => {
+    try {
+      const saved = localStorage.getItem('rajdeep_boss_cv_custom');
+      if (saved) return JSON.parse(saved);
+    } catch {
+      // Fallback
+    }
+    return INITIAL_CAREER_DATA;
+  });
+
   const [stats, setStats] = useState(INITIAL_CAREER_DATA.stats);
   const [outfit, setOutfit] = useState<OutfitType>('scholar');
-  const [isPortraitCanvas, setIsPortraitCanvas] = useState(false);
+  const [isPortraitCanvas, setIsPortraitCanvas] = useState(true);
   const [lightingMode, setLightingMode] = useState<LightingMode>('day');
   const [isAudioOn, setIsAudioOn] = useState(false);
+  const [currentExpression, setCurrentExpression] = useState<PortraitExpressionId>('wicked_smirk');
+  const [isGodMode, setIsGodMode] = useState(false);
 
   const [activeHotspot, setActiveHotspot] = useState<Hotspot | null>(null);
   const [activeModal, setActiveModal] = useState<string | null>(null);
@@ -55,7 +67,25 @@ export const App: React.FC = () => {
     }, 3800);
   }, []);
 
-  // Set up player zone callback
+  const setExpression = useCallback((exprId: PortraitExpressionId, playSound: boolean = true) => {
+    setCurrentExpression(exprId);
+    if (playSound) {
+      const expr = PORTRAIT_EXPRESSIONS.find(e => e.id === exprId);
+      if (expr) {
+        audio.playExpressionChirp(expr.sound.freq, expr.sound.type, expr.sound.duration);
+      }
+    }
+  }, []);
+
+  const activateGodMode = useCallback(() => {
+    setIsGodMode(true);
+    playerRef.current.isGodMode = true;
+    setExpression('deal_with_it', true);
+    audio.playGodModeChime();
+    playerRef.current.showBubble("👑 CHIEF EXPLORER GOD MODE! (2.5x Speed + Diamond Hammer) Deal with it.", 3.5);
+  }, [setExpression]);
+
+  // Set up player callbacks and global listeners
   useEffect(() => {
     const player = playerRef.current;
     player.onZoneChange = (z) => {
@@ -63,13 +93,73 @@ export const App: React.FC = () => {
       showZoneNotification(z.name, z.desc);
     };
 
+    // 13th-Day Shift Zombie Idle Callback
+    player.onIdleZombie = () => {
+      setExpression('shift_zombie', false);
+      player.showBubble("13th-Day shift fatigue... need coffee...", 2.2);
+    };
+
+    // DevTools Console ASCII Art Welcome
+    console.log(
+      "%c" +
+      "       /\\\n" +
+      "      /  \\       ===============================================================\n" +
+      "     / /\\ \\      GEOLOGY QUEST: BASIN TO BIT — 16-BIT RETRO RPG PORTFOLIO\n" +
+      "    / /__\\ \\     Player: Rajdeep Tarafder (Wellsite & Exploration Geologist | ONGC)\n" +
+      "   |   ||   |    CPF: 141604 | Email: tarafderrajdeep@gmail.com | +91 90075 15735\n" +
+      "   |   ||   |    LinkedIn: https://linkedin.com/in/rajdeep-tarafder-82a408184\n" +
+      "   |   ||   |    ===============================================================\n" +
+      "  /==========\\   Core Arsenal: Petrel, PaleoScan, 3D MEM, Post Drill Analysis,\n" +
+      " / /|      |\\ \\  Wellsite Surveillance, Natural H2 & He, Supervised ML (EPMA)\n" +
+      "/_/ |______|_\\_\\ Subsurface decoded! Reach out to Rajdeep: tarafderrajdeep@gmail.com\n",
+      "color: #F59E0B; font-weight: bold; font-family: monospace; font-size: 11px;"
+    );
+
+    // Global Key Listener: Konami Code & Ctrl+S Rescue
+    const konamiSequence = [
+      'ArrowUp', 'ArrowUp',
+      'ArrowDown', 'ArrowDown',
+      'ArrowLeft', 'ArrowRight',
+      'ArrowLeft', 'ArrowRight',
+      'b', 'a'
+    ];
+    let konamiIndex = 0;
+
+    const handleGlobalKeyDown = (e: KeyboardEvent) => {
+      // Petrel 4:59 PM Rescue Shortcut: Ctrl+S
+      if ((e.ctrlKey || e.metaKey) && (e.key === 's' || e.key === 'S')) {
+        e.preventDefault();
+        setStats(prev => ({ ...prev, currentXP: prev.currentXP + 50 }));
+        setExpression('wicked_smirk', true);
+        playerRef.current.showBubble("💾 CTRL+S RESCUE! Prospect model saved! +50 XP", 2.5);
+        audio.playFanfare();
+      }
+
+      // Konami Code Detection
+      const target = konamiSequence[konamiIndex].toLowerCase();
+      if (e.key.toLowerCase() === target) {
+        konamiIndex++;
+        if (konamiIndex === konamiSequence.length) {
+          konamiIndex = 0;
+          activateGodMode();
+        }
+      } else {
+        konamiIndex = 0;
+      }
+    };
+
+    window.addEventListener('keydown', handleGlobalKeyDown);
+
     // Auto hide initial welcome zone toast
     const t = setTimeout(() => {
       setZoneBanner(prev => ({ ...prev, visible: false }));
     }, 4000);
 
-    return () => clearTimeout(t);
-  }, [showZoneNotification]);
+    return () => {
+      window.removeEventListener('keydown', handleGlobalKeyDown);
+      clearTimeout(t);
+    };
+  }, [showZoneNotification, activateGodMode, setExpression]);
 
   const addXP = useCallback((amount: number) => {
     setStats(prev => {
@@ -83,6 +173,7 @@ export const App: React.FC = () => {
         newMax = Math.round(newMax * 1.35);
         playerRef.current.showBubble(`⭐ LEVEL UP! NOW LEVEL ${newLevel}!`, 3.0);
         audio.playFanfare();
+        setExpression('deal_with_it', true);
       }
 
       return {
@@ -92,7 +183,7 @@ export const App: React.FC = () => {
         maxXP: newMax
       };
     });
-  }, []);
+  }, [setExpression]);
 
   const handleTogglePortrait = () => {
     setIsPortraitCanvas(prev => !prev);
@@ -139,21 +230,28 @@ export const App: React.FC = () => {
 
   const handleTriggerHotspot = (h: Hotspot) => {
     if (h.specialType === 'minigame_seismic') {
+      setExpression('wicked_smirk');
       setActiveModal('minigame_seismic');
     } else if (h.specialType === 'minigame_kick') {
+      setExpression('blowout_sweat');
       setActiveModal('minigame_kick');
     } else if (h.specialType === 'minigame_rock') {
+      setExpression('loupe_cyclops');
       setActiveModal('minigame_rock');
     } else if (h.specialType === 'minigame_shift') {
+      setExpression('caffeine_overdrive');
       setActiveModal('minigame_shift');
     } else if (h.specialType === 'minigame_kimberlite') {
+      setExpression('kimberlite_eureka');
       setActiveModal('minigame_kimberlite');
     } else if (h.specialType === 'minigame_sar') {
+      setExpression('matrix_hacker');
       setActiveModal('minigame_sar');
     } else if (h.specialType === 'art_exhibit') {
       setActiveModal('art_exhibit');
     } else if (h.specialType === 'helium_gag') {
       playerRef.current.heliumTimer = 10.0;
+      setExpression('helium_chipmunk');
       playerRef.current.showBubble('INHALED PURE HELIUM-4 FROM DEEP BASEMENT! *SQUEEEEAK!*', 3.0);
       audio.playHeliumChirp();
       setHotspotModalData({
@@ -180,6 +278,7 @@ export const App: React.FC = () => {
     audio.playTone(880, 'sine', 0.1, 0.15);
 
     if (id === 'hotspot_marine') {
+      setExpression('matrix_hacker');
       setHotspotModalData({
         title,
         content: `
@@ -193,6 +292,7 @@ export const App: React.FC = () => {
         `
       });
     } else if (id === 'hotspot_fossil') {
+      setExpression('kimberlite_eureka');
       setHotspotModalData({
         title,
         content: `
@@ -206,6 +306,7 @@ export const App: React.FC = () => {
         `
       });
     } else if (id === 'hotspot_field') {
+      setExpression('loupe_cyclops');
       setHotspotModalData({
         title,
         content: `
@@ -219,6 +320,7 @@ export const App: React.FC = () => {
         `
       });
     } else if (id === 'hotspot_plotter') {
+      setExpression('wicked_smirk');
       setHotspotModalData({
         title,
         content: `
@@ -232,6 +334,7 @@ export const App: React.FC = () => {
         `
       });
     } else if (id === 'hotspot_derrick') {
+      setExpression('blowout_sweat');
       setHotspotModalData({
         title,
         content: `
@@ -245,6 +348,7 @@ export const App: React.FC = () => {
         `
       });
     } else if (id === 'hotspot_cementing') {
+      setExpression('blowout_sweat');
       setHotspotModalData({
         title,
         content: `
@@ -258,6 +362,7 @@ export const App: React.FC = () => {
         `
       });
     } else if (id === 'hotspot_bop') {
+      setExpression('blowout_sweat');
       setHotspotModalData({
         title,
         content: `
@@ -271,6 +376,7 @@ export const App: React.FC = () => {
         `
       });
     } else if (id === 'hotspot_trekking') {
+      setExpression('centre_back');
       setHotspotModalData({
         title,
         content: `
@@ -284,6 +390,7 @@ export const App: React.FC = () => {
         `
       });
     } else if (id === 'hotspot_gym') {
+      setExpression('centre_back');
       setHotspotModalData({
         title,
         content: `
@@ -296,6 +403,7 @@ export const App: React.FC = () => {
         `
       });
     } else if (id === 'hotspot_shaker') {
+      setExpression('loupe_cyclops');
       setHotspotModalData({
         title,
         content: `
@@ -308,6 +416,7 @@ export const App: React.FC = () => {
         `
       });
     } else {
+      setExpression('wicked_smirk');
       setHotspotModalData({
         title,
         content: `<p>Operational workstation: <strong>${title}</strong>. Integrated with active ONGC subsurface &amp; frontline operational data streams.</p>`
@@ -318,24 +427,12 @@ export const App: React.FC = () => {
   };
 
   const handleOpenBackpack = () => {
-    const p = careerData.player;
-    setHotspotModalData({
-      title: 'Geological Expedition Backpack',
-      content: `
-        <h4>EQUIPPED FIELD &amp; OPERATIONAL GEAR:</h4>
-        <ul>
-          <li>🔨 <strong>Estwing Rock Hammer:</strong> Fresh outcrop cleavage &amp; mineral strike (Press [H]).</li>
-          <li>🔍 <strong>10x Bausch &amp; Lomb Loupe:</strong> Petrographic hand lens inspection (Press [M]).</li>
-          <li>⚽ <strong>Centre-Back Cleats:</strong> Slide tackle maneuver (Press [F]).</li>
-          <li>🪖 <strong>Wellsite PPE:</strong> Hard Hat &amp; High-Vis Vest (Auto-equips on Rig Floor).</li>
-          <li>☕ <strong>3 AM Doghouse Mug:</strong> Infinite caffeine supply for pore pressure surveillance.</li>
-          <li>💻 <strong>Interpretation Arsenal:</strong> Schlumberger Petrel, Eliis PaleoScan, DSPetrophysics, QGIS.</li>
-        </ul>
-        <h4>CURRENT PILOT:</h4>
-        <p><strong>${p.name}</strong> (${p.title}) &bull; CPF: ${p.cpf} &bull; DOJ: ${p.doj}</p>
-      `
-    });
-    setActiveModal('hotspot_detail');
+    setActiveModal('backpack');
+  };
+
+  const handleOpenBossResume = () => {
+    setExpression('deal_with_it', false);
+    setActiveModal('boss_resume');
   };
 
   const handleAddMilestone = (title: string, date: string, category: string, desc: string) => {
@@ -382,8 +479,11 @@ export const App: React.FC = () => {
         player={careerData.player}
         stats={stats}
         outfit={outfit}
+        currentExpression={currentExpression}
+        isGodMode={isGodMode}
         isPortraitCanvas={isPortraitCanvas}
         onTogglePortrait={handleTogglePortrait}
+        onActivateGodMode={activateGodMode}
         onTeleport={handleTeleport}
         onToggleElevator={() => setActiveModal(prev => prev === 'strat_elevator' ? null : 'strat_elevator')}
         onOpenBackpack={handleOpenBackpack}
@@ -392,7 +492,7 @@ export const App: React.FC = () => {
         onToggleLighting={handleToggleLighting}
         isAudioOn={isAudioOn}
         onToggleAudio={handleToggleAudio}
-        onOpenBossResume={() => setActiveModal('boss_resume')}
+        onOpenBossResume={handleOpenBossResume}
       />
 
       {/* Viewport for 2D Tilemap & Avatar */}
@@ -438,27 +538,42 @@ export const App: React.FC = () => {
         visible={activeHotspot !== null && activeModal === null}
       />
 
-      {/* Hotspot Lore Modal */}
+      {/* Hotspot Lore Modal with Hades/Stardew Character Frame */}
       <HotspotModal
         isOpen={activeModal === 'hotspot_detail'}
         title={hotspotModalData.title}
         content={hotspotModalData.content}
         outfit={outfit}
+        expressionId={currentExpression}
         onClose={closeAllModals}
       />
 
-      {/* Mini-Game 1: Seismic Fault Sniper */}
+      {/* Interactive Geological Expedition Backpack & 10-Face Expression Soundboard */}
+      <BackpackModal
+        isOpen={activeModal === 'backpack'}
+        player={careerData.player}
+        outfit={outfit}
+        currentExpression={currentExpression}
+        onSelectExpression={(expr) => {
+          setCurrentExpression(expr);
+        }}
+        onClose={closeAllModals}
+      />
+
+      {/* Mini-Game 1: Seismic Fault Sniper (Petrel Workstation + 4:59 PM Cube Freeze) */}
       <SeismicMiniGameModal
         isOpen={activeModal === 'minigame_seismic'}
         onClose={closeAllModals}
         onRewardXP={addXP}
+        onTriggerExpression={(expr) => setExpression(expr as PortraitExpressionId)}
       />
 
-      {/* Mini-Game 2: Kill the Kick! */}
+      {/* Mini-Game 2: Kill the Kick! (GDA-A Well Control + 3 AM Masala Chai Spike) */}
       <KickMiniGameModal
         isOpen={activeModal === 'minigame_kick'}
         onClose={closeAllModals}
         onRewardXP={addXP}
+        onTriggerExpression={(expr) => setExpression(expr as PortraitExpressionId)}
       />
 
       {/* Mini-Game 3: Outcrop Hammer & Lens Roulette */}
@@ -504,11 +619,12 @@ export const App: React.FC = () => {
         onDeleteMilestone={handleDeleteMilestone}
       />
 
-      {/* Boss Mode Panic Button ATS Printable Resume */}
+      {/* 100% Inline-Editable Boss Mode Executive CV Studio */}
       <BossResumeModal
         isOpen={activeModal === 'boss_resume'}
         onClose={closeAllModals}
         careerData={careerData}
+        onUpdateCareerData={setCareerData}
       />
     </div>
   );

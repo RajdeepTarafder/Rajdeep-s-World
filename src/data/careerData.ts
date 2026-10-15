@@ -313,7 +313,126 @@ export const INITIAL_CAREER_DATA: CareerData = {
       period: "Ongoing",
       description: "Completed demanding high-altitude group treks including Dafeybhir Pass (Sikkim) and exploratory high-elevation passes across Himachal Pradesh."
     }
-  ]
+  ],
+
+  operationsTally: [
+    {
+      id: "tally_1",
+      basin: "Vindhyan Basin (BExB & EPMB Blocks)",
+      roleScope: "Lead Interpretation Geologist & Prospect Maturation",
+      software: "Petrel, PaleoScan, DSPetrophysics, QGIS",
+      outcome: "Generated, evaluated, and defended 2 drillable exploratory prospects; completed comprehensive G&G basin assessment.",
+      category: "interpretation"
+    },
+    {
+      id: "tally_2",
+      basin: "Son Valley & Bhima-Kaladgi",
+      roleScope: "Structural Geologist & 3D Geomechanics Lead",
+      software: "3D Mechanical Earth Modeling (MEM), PaleoScan RGT",
+      outcome: "Delineated deep regional fault architectures, basement shear reactivation networks, and critical mineral enrichment trends.",
+      category: "interpretation"
+    },
+    {
+      id: "tally_3",
+      basin: "GDA-A Exploratory Well, Samastipur",
+      roleScope: "Frontline Wellsite Geologist (8.5\" Phase Surveillance)",
+      software: "Pore Pressure / PDA, Mud Gas Chromatography, Cuttings Microscopy",
+      outcome: "Supervised critical open-ended drill pipe cement squeeze for loss-zone remediation; verified formation integrity with Zero LTI.",
+      category: "wellsite"
+    },
+    {
+      id: "tally_4",
+      basin: "Vindhyan & Chhattisgarh Basins (Unconventional Clean Energy)",
+      roleScope: "Pioneering Explorationist for Natural H2 & Helium (He)",
+      software: "Noble Gas Geochemical Modeling, Deep Crustal Lineament GIS",
+      outcome: "Mapped tectonic migration corridors for primordial helium degassing & natural hydrogen generation in deep Precambrian fractures.",
+      category: "interpretation"
+    },
+    {
+      id: "tally_5",
+      basin: "Assam Shelf Basin (Duliajan, OIL)",
+      roleScope: "Vocational Petroleum Trainee",
+      software: "Open-Hole Wireline Logging, Mud Logging, Basin Modeling",
+      outcome: "Evaluated Barail & Tipam reservoir sandstones, regional cap-rock seals, and structural closures across producing fields.",
+      category: "wellsite"
+    }
+  ],
+
+  technicalReports: [
+    {
+      id: "rep_1",
+      title: "Natural Hydrogen (H2) & Helium (He) Generation Potential in Vindhyan & Chhattisgarh",
+      category: "interpretation",
+      institution: "ONGC Exploration Subsurface Group",
+      period: "2024 – 2025",
+      summary: "Synthesized basement fault lineaments, noble gas isotope signatures, and serpentine hydration pathways to establish exploration play concepts for natural H2 & helium."
+    },
+    {
+      id: "rep_2",
+      title: "Critical Mineral Enrichment Zones & 3D Fault Characterization in Son Valley",
+      category: "interpretation",
+      institution: "ONGC Vindhyan Block Project",
+      period: "2024",
+      summary: "Integrated 2D/3D seismic cubes with potential field data to model mechanical fault stresses (MEM) and map structural traps and mineral enrichment halos."
+    },
+    {
+      id: "rep_3",
+      title: "3D Mechanical Earth Modeling (MEM) & Wellbore Stability Framework",
+      category: "wellsite",
+      institution: "Subsurface G&G Group, Dehradun",
+      period: "2023 – 2024",
+      summary: "Built 1D/3D pore pressure and geomechanical stress profiles to optimize casing design, minimize mud losses, and de-risk under-drilling exploratory wells."
+    },
+    {
+      id: "rep_4",
+      title: "Host Rock Identification & Provenance Detection via Machine Learning (M.Sc. Tech Thesis)",
+      category: "ai_data",
+      institution: "IIT (ISM) Dhanbad",
+      period: "2022 – 2023",
+      summary: "Engineered Random Forest, SVM, and Decision Tree pipelines classifying detrital garnet EPMA geochemical datasets to pinpoint parent host rocks and diamond-bearing kimberlitic pyropes."
+    },
+    {
+      id: "rep_5",
+      title: "Exchange of Iron from Atmosphere to Ocean Under Anthropogenic Inducements (B.Sc. Dissertation)",
+      category: "ai_data",
+      institution: "Jadavpur University, Kolkata",
+      period: "2019 – 2020",
+      summary: "Modeled aerosol iron solubility, atmospheric dust transport, and ocean phytoplankton biogeochemical nutrient cycles in HNLC basins."
+    }
+  ],
+
+  specializedTraining: [
+    {
+      id: "train_1",
+      title: "12-Week AI for Earth Observation",
+      category: "ai_data",
+      issuer: "National Remote Sensing & Earth Observation Consortium",
+      description: "Specialized training in SAR Despeckling filters, Hyperspectral mineral mapping, and Vision Transformer (ViT) architectures for terrain feature extraction."
+    },
+    {
+      id: "train_2",
+      title: "Wellsite PDA, Real-Time Pore Pressure & Rig Safety Operations",
+      category: "wellsite",
+      issuer: "ONGC Drilling Operations Directorate",
+      description: "Hands-on mastery of dc-exponent pore pressure surveillance, kick detection, annular/ram BOP stack activation, and Zero LTI rig protocol enforcement."
+    },
+    {
+      id: "train_3",
+      title: "Supervised Machine Learning: Regression and Classification",
+      category: "ai_data",
+      issuer: "DeepLearning.AI / Coursera",
+      description: "Advanced cost functions, gradient descent optimization, regularized logistic models, and ensemble decision tree classifiers (Grade: 90.4%)."
+    },
+    {
+      id: "train_4",
+      title: "Data Analysis & Scientific Computing with Python",
+      category: "ai_data",
+      issuer: "freeCodeCamp",
+      description: "NumPy, Pandas, Matplotlib, automated subsurface telemetry wrangling, and statistical geospatial modeling."
+    }
+  ],
+
+  customSections: []
 };
 
 export const COMIC_BUBBLES = [

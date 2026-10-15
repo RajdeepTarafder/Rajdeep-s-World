@@ -5,6 +5,7 @@ interface SeismicMiniGameModalProps {
   isOpen: boolean;
   onClose: () => void;
   onRewardXP: (xp: number) => void;
+  onTriggerExpression?: (exprId: string) => void;
 }
 
 interface Target {
@@ -20,12 +21,14 @@ interface Target {
 export const SeismicMiniGameModal: React.FC<SeismicMiniGameModalProps> = ({
   isOpen,
   onClose,
-  onRewardXP
+  onRewardXP,
+  onTriggerExpression
 }) => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
   const [score, setScore] = useState(0);
   const [timeLeft, setTimeLeft] = useState(15);
   const [gameResult, setGameResult] = useState<'playing' | 'won' | 'lost'>('playing');
+  const [freezeState, setFreezeState] = useState<'idle' | 'freezing' | 'rescued'>('idle');
 
   const gameStateRef = useRef({
     active: false,
@@ -202,8 +205,56 @@ export const SeismicMiniGameModal: React.FC<SeismicMiniGameModalProps> = ({
           </div>
         )}
 
-        <div className="modal-footer-bar">
-          <button onClick={onClose} className="nes-btn is-error">
+        {/* Easter Egg: 4:59 PM Petrel 3D Cube Freeze Gag */}
+        {freezeState === 'freezing' && (
+          <div className="petrel-crash-box" style={{ background: '#7F1D1D', border: '3px solid #EF4444', padding: '12px', margin: '12px 0', animation: 'pulse 0.8s infinite' }}>
+            <p style={{ color: '#FEE2E2', fontWeight: 'bold', fontSize: '11px', marginBottom: '6px' }}>
+              ⚠️ WARNING: 64GB RAM MAXED OUT AT 4:59 PM! Petrel Not Responding...
+            </p>
+            <p style={{ color: '#FCA5A5', fontSize: '9px', marginBottom: '8px' }}>
+              Windows Error 0x8849: Giant 3D fault envelope compilation overload! Hit <strong>Ctrl + S</strong> immediately!
+            </p>
+            <button
+              onClick={() => {
+                setFreezeState('rescued');
+                audio.playFanfare();
+                onRewardXP(50);
+                if (onTriggerExpression) onTriggerExpression('wicked_smirk');
+              }}
+              className="nes-btn is-warning"
+              style={{ fontSize: '9px', padding: '6px 14px' }}
+            >
+              💾 RESCUE PROJECT [Ctrl + S]
+            </button>
+          </div>
+        )}
+
+        {freezeState === 'rescued' && (
+          <div className="minigame-result-msg result-success" style={{ background: '#065F46', border: '2px solid #34D399', margin: '10px 0' }}>
+            ✨ Phew! Rajdeep's Ctrl+S reflex &amp; auto-backup saved the BExB/EPMB prospect model! (+50 XP)
+            <div style={{ fontSize: '9px', marginTop: '4px', color: '#A7F3D0' }}>
+              🎭 Wicked Discovery Smirk equipped! Subsurface locked!
+            </div>
+          </div>
+        )}
+
+        <div className="modal-footer-bar" style={{ display: 'flex', justifyContent: 'space-between', gap: '8px', flexWrap: 'wrap' }}>
+          {freezeState === 'idle' && (
+            <button
+              onClick={() => {
+                setFreezeState('freezing');
+                audio.playAlarmSiren();
+                setTimeout(() => {
+                  setFreezeState(prev => prev === 'freezing' ? 'freezing' : prev);
+                }, 2000);
+              }}
+              className="nes-btn is-warning"
+              style={{ fontSize: '8px', padding: '4px 10px' }}
+            >
+              ⚡ Render Massive 3D Fault Cube
+            </button>
+          )}
+          <button onClick={onClose} className="nes-btn is-error" style={{ fontSize: '9px', padding: '4px 10px' }}>
             Exit Petrel Workstation
           </button>
         </div>

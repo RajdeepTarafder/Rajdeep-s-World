@@ -96,6 +96,62 @@ export interface SkillsMatrix {
   design: string[];
 }
 
+export interface OperationsTallyRow {
+  id: string;
+  basin: string;
+  roleScope: string;
+  software: string;
+  outcome: string;
+  category?: 'interpretation' | 'wellsite' | 'ai_data';
+}
+
+export interface TechnicalReport {
+  id: string;
+  title: string;
+  category: 'interpretation' | 'wellsite' | 'ai_data';
+  institution: string;
+  period: string;
+  summary: string;
+}
+
+export interface SpecializedTraining {
+  id: string;
+  title: string;
+  issuer: string;
+  category: 'interpretation' | 'wellsite' | 'ai_data';
+  description: string;
+}
+
+export interface CustomSection {
+  id: string;
+  title: string;
+  bullets: string[];
+}
+
+export type PortraitExpressionId =
+  | 'wicked_smirk'
+  | 'caffeine_overdrive'
+  | 'loupe_cyclops'
+  | 'blowout_sweat'
+  | 'helium_chipmunk'
+  | 'matrix_hacker'
+  | 'centre_back'
+  | 'kimberlite_eureka'
+  | 'shift_zombie'
+  | 'deal_with_it';
+
+export interface PortraitExpression {
+  id: PortraitExpressionId;
+  name: string;
+  quote: string;
+  triggerText: string;
+  sound: {
+    freq: number;
+    type: OscillatorType;
+    duration: number;
+  };
+}
+
 export interface CareerData {
   player: PlayerProfile;
   stats: PlayerStats;
@@ -107,6 +163,10 @@ export interface CareerData {
   skills: SkillsMatrix;
   certifications: Certification[];
   extracurriculars: Extracurricular[];
+  operationsTally?: OperationsTallyRow[];
+  technicalReports?: TechnicalReport[];
+  specializedTraining?: SpecializedTraining[];
+  customSections?: CustomSection[];
 }
 
 export type OutfitType = 'scholar' | 'lab' | 'rig';

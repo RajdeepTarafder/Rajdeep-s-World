@@ -1,12 +1,13 @@
 import React, { useEffect, useRef } from 'react';
 import { OutfitType } from '../types/game';
-import { sprites } from '../engine/sprites';
+import { sprites, PORTRAIT_EXPRESSIONS } from '../engine/sprites';
 
 interface HotspotModalProps {
   isOpen: boolean;
   title: string;
   content: string;
   outfit: OutfitType;
+  expressionId?: string;
   onClose: () => void;
 }
 
@@ -15,9 +16,12 @@ export const HotspotModal: React.FC<HotspotModalProps> = ({
   title,
   content,
   outfit,
+  expressionId = 'wicked_smirk',
   onClose
 }) => {
   const portraitRef = useRef<HTMLCanvasElement | null>(null);
+
+  const currentExpr = PORTRAIT_EXPRESSIONS.find(e => e.id === expressionId) || PORTRAIT_EXPRESSIONS[0];
 
   useEffect(() => {
     if (isOpen && portraitRef.current) {
@@ -25,14 +29,16 @@ export const HotspotModal: React.FC<HotspotModalProps> = ({
       if (ctx) {
         ctx.clearRect(0, 0, 80, 80);
         const outfitKey = outfit === 'scholar' ? 'academic' : outfit;
-        const spr = sprites.get(`portrait_${outfitKey}`);
+        const spr = sprites.get(`portrait_${currentExpr.id}_${outfitKey}`) ||
+                    sprites.get(`portrait_${currentExpr.id}`) ||
+                    sprites.get(`portrait_${outfitKey}`);
         if (spr) {
           ctx.imageSmoothingEnabled = false;
           ctx.drawImage(spr, 0, 0, 80, 80);
         }
       }
     }
-  }, [isOpen, outfit]);
+  }, [isOpen, outfit, currentExpr.id]);
 
   if (!isOpen) return null;
 
@@ -42,13 +48,21 @@ export const HotspotModal: React.FC<HotspotModalProps> = ({
         <p className="title">{title}</p>
         <div className="modal-body-layout">
           <div className="modal-portrait-frame">
-            <canvas
-              ref={portraitRef}
-              width={80}
-              height={80}
-              className="dialog-portrait-canvas"
-            />
-            <span className="pilot-caption">Rajdeep Tarafder</span>
+            <div className="portrait-frame-wrapper">
+              <canvas
+                ref={portraitRef}
+                width={80}
+                height={80}
+                className="dialog-portrait-canvas"
+              />
+            </div>
+            <div className="dialog-mood-badge" id="dialog-mood-badge">
+              🎭 {currentExpr.name}
+            </div>
+            <div className="dialog-quote-bubble" id="dialog-quote-bubble">
+              &ldquo;{currentExpr.quote}&rdquo;
+            </div>
+            <span className="pilot-caption">Rajdeep Tarafder &bull; ONGC</span>
           </div>
           <div
             className="modal-content-area"

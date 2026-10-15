@@ -6,8 +6,11 @@ interface HUDProps {
   player: PlayerProfile;
   stats: PlayerStats;
   outfit: OutfitType;
+  currentExpression: string;
+  isGodMode?: boolean;
   isPortraitCanvas: boolean;
   onTogglePortrait: () => void;
+  onActivateGodMode?: () => void;
   onTeleport: (zone: 'academic' | 'lab' | 'rig') => void;
   onToggleElevator: () => void;
   onOpenBackpack: () => void;
@@ -23,8 +26,11 @@ export const HUD: React.FC<HUDProps> = ({
   player,
   stats,
   outfit,
+  currentExpression,
+  isGodMode = false,
   isPortraitCanvas,
   onTogglePortrait,
+  onActivateGodMode,
   onTeleport,
   onToggleElevator,
   onOpenBackpack,
@@ -36,6 +42,26 @@ export const HUD: React.FC<HUDProps> = ({
   onOpenBossResume
 }) => {
   const portraitCanvasRef = useRef<HTMLCanvasElement | null>(null);
+  const clickCountRef = useRef<number>(0);
+  const clickTimerRef = useRef<any>(null);
+
+  const handlePortraitClick = () => {
+    // Check 5 clicks within 3 seconds for God Mode easter egg
+    clickCountRef.current += 1;
+    if (clickTimerRef.current) clearTimeout(clickTimerRef.current);
+    clickTimerRef.current = setTimeout(() => {
+      clickCountRef.current = 0;
+    }, 2800);
+
+    if (clickCountRef.current >= 5) {
+      clickCountRef.current = 0;
+      if (onActivateGodMode) {
+        onActivateGodMode();
+      }
+    }
+
+    onTogglePortrait();
+  };
 
   useEffect(() => {
     if (isPortraitCanvas && portraitCanvasRef.current) {
@@ -43,14 +69,16 @@ export const HUD: React.FC<HUDProps> = ({
       if (ctx) {
         ctx.clearRect(0, 0, 40, 40);
         const outfitKey = outfit === 'scholar' ? 'academic' : outfit;
-        const spr = sprites.get(`portrait_${outfitKey}`);
+        const spr = sprites.get(`portrait_${currentExpression}_${outfitKey}`) ||
+                    sprites.get(`portrait_${currentExpression}`) ||
+                    sprites.get(`portrait_${outfitKey}`);
         if (spr) {
           ctx.imageSmoothingEnabled = false;
           ctx.drawImage(spr, 0, 0, 40, 40);
         }
       }
     }
-  }, [isPortraitCanvas, outfit]);
+  }, [isPortraitCanvas, outfit, currentExpression]);
 
   const xpPercent = Math.min(100, Math.round((stats.currentXP / stats.maxXP) * 100));
   const isPPEOn = outfit === 'rig';
@@ -65,8 +93,8 @@ export const HUD: React.FC<HUDProps> = ({
         <div className="hud-profile-card">
           <div
             className="hud-portrait-wrapper"
-            onClick={onTogglePortrait}
-            title="Click to toggle Real Field Photo / 16-Bit Pixel Sprite"
+            onClick={handlePortraitClick}
+            title="Click to toggle Real Field Photo / 16-Bit Pixel Sprite (Click 5x for God Mode!)"
           >
             {!isPortraitCanvas ? (
               <img
@@ -92,6 +120,11 @@ export const HUD: React.FC<HUDProps> = ({
               <span className={`ppe-badge ${isPPEOn ? 'ppe-on' : 'ppe-off'}`}>
                 {isPPEOn ? 'PPE: ON (HARD HAT)' : 'PPE: OFF'}
               </span>
+              {isGodMode && (
+                <span className="nes-badge is-error god-mode-badge" style={{ fontSize: '7px', animation: 'pulse 1.2s infinite' }}>
+                  <span className="is-error">👑 GOD MODE (2.5x)</span>
+                </span>
+              )}
             </div>
             {/* Dynamic XP & Stamina Bars */}
             <div className="hud-bars">
