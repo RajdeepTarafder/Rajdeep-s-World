@@ -1,0 +1,15 @@
+{
+  "name": "rajdeeps-world-rpg",
+  "version": "1.0.0",
+  "description": "16-Bit Retro RPG Portfolio & Executive Resume for Rajdeep Tarafder (Wellsite & Exploration Geologist)",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "start": "node server.js"
+  },
+  "devDependencies": {
+    "vite": "^8.3.4"
+  }
+}
